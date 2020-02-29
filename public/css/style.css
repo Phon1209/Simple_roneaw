@@ -1,0 +1,349 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Main */
+:root {
+  --primary-color: #ffc1ce;
+  --secondary-color: #bbf6fe;
+  --light-primary-color: #FFD7DF;
+}
+
+
+html , body{
+  font-family: 'Mali', cursive;
+  line-height: 1.7em;
+  font-size: 30px;
+  background:var(--secondary-color);
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+
+a{
+  color: #333;
+  text-decoration: none;
+}
+
+h1, h2, h3 {
+  padding-bottom: 1.5rem;
+}
+
+p {
+  padding: 1rem;
+}
+
+/* Utilities */
+
+.container{
+  margin: auto;
+  padding: 0 1.5rem;
+  overflow: auto;
+}
+
+.pd-1 {padding: 0.3rem 0;}
+.pd-2 {padding: 0.5rem 0;}
+.pd-3 {padding: 0.7rem 0;}
+
+.cap-1100{min-width: 1100px;}
+
+.btn:hover{
+  background: #ffc1ce;
+}
+
+.bg-brown {
+  background: rgb(224, 202, 194)!important;
+}
+
+.bg-white {
+  background: white!important;
+}
+
+.bg-pink {
+  background: #FFD7DF!important;
+}
+
+.v-large-btn {
+  font-size: 30px;
+  padding: 20px 30px;
+}
+
+.line {
+  width: 80%;
+  border: 2px white solid;
+  border-radius: 5px;
+  margin: 30px auto;
+  margin-bottom: 10px;
+}
+
+.btn {
+  padding: 10px;
+  background: #FFD7DF;
+  border: 1px #333 solid;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+
+/* Navbar */
+#navbar{
+  overflow: auto;
+  background-color: #ffc1ce;
+}
+
+#navbar ul {
+  float: right;
+  list-style: none;
+}
+
+#navbar ul li {
+  float: left;
+}
+
+#navbar ul li a {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  padding: 0.5rem 0.8rem;
+}
+
+#navbar ul li a.current{
+  background: #FFD7DF;
+  color: rgb(168, 53, 11);
+}
+
+#navbar ul li a:hover{
+  background: #FFD7DF;
+  color: rgb(168, 53, 11);
+}
+
+/* Section: Login (Page: Login)*/
+
+#login-form .form-group {
+  text-align: center;
+  margin: 5vh auto;
+  max-width: 500px;
+  background: #f4f4f4;
+  padding: 0.5rem;
+  box-shadow: 0 0 10px 3px #ddd;
+}
+
+#login-form .form-group h1 {
+  text-align: center;
+  font-family: 'Source Sans Pro';
+  padding-top: 0.3rem;
+  padding-bottom: 0rem;
+}
+
+#login-form .form-group .form-box {
+  padding: 0.3rem 0;
+}
+
+#login-form .form-group .form-box label {
+  display: block;
+  text-align: left;
+  font-size: 0.8rem;
+  margin-bottom: 5px;
+  /* width: 4.5rem; */
+}
+
+#login-form .form-group .form-box input {
+  width: 100%;
+  padding: 0.3rem;
+  font-size: 1rem;
+  border-radius: 0.2rem;
+}
+
+#login-form #error {
+  font-size: 1rem;
+  color: red;
+  margin-right: 0rem;
+  width: 10rem;
+  display: inline-block;
+}
+
+#login-form button {
+  margin: 20px auto;
+  width:100%;
+  display: block;
+  font-size: 1rem;
+  padding: 0.1rem 0.4rem;
+  border-radius: 0.4rem;
+  font-family: 'Mali', cursive;
+}
+
+
+/* Section: Select Organization (Page: Form) */
+
+.slct .inst {
+  background: #ffc1ce;
+  text-align: center;
+}
+
+.slct .inst h3 {
+  padding: 0.3rem 0;
+}
+
+.slct .radio-slct {
+  margin: 1rem auto;
+  margin-top: 50px;
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.slct .radio-slct input[type="radio"] {
+  opacity: 0;
+  position: fixed;
+  width: 0;
+} /* Make Radio Disappear */
+
+.slct .radio-slct label {
+  display: inline-block;
+  margin: 0 30px;
+  min-width: 400px;
+  text-align: center;
+  padding: 10px 20px;
+  font-size: 0.7rem;
+  border: 2px solid #ccc;
+  background: white;
+  border-radius: 4px;
+}
+
+.slct input[type="radio"]:checked + label {
+  background-color:#FFD7DF;
+  border-color: white;
+  border: rgb(224, 202, 194) 2px solid;
+  font-weight: bolder;
+}
+
+.slct input[type="radio"]:hover + label {
+  border: 2px dashed #ffc1ce;
+}
+
+.panel {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-around;
+}
+
+#org-slct {
+  display: inline-block;
+  /* margin:  auto;
+  margin-top: 1rem; */
+  border: #eee solid 2px;
+  border-radius: 10px;
+  background: #f4f4f4;
+  width: 50vw;
+  box-sizing: content-box;
+}
+
+#org-slct .inst {
+  display: inline-block;
+  width: 50vw;
+  border-radius: 10px;
+}
+
+#work-slct {
+  width: 30vw;
+  display: inline-block;
+  /* margin: auto;
+  margin-top: 1rem; */
+  border: #eee solid 2px;
+  border-radius: 10px;
+  background: #f4f4f4;
+  box-sizing: initial;
+}
+
+#work-slct .inst {
+  width: 30vw;
+  border-radius: 10px;
+}
+
+#work-slct .radio-slct label {
+  min-width: 200px;
+}
+
+/* Section: Table Form */
+
+#table-form table {
+  border-collapse: collapse;
+  font-size: 0.6rem;
+  margin: 90px auto;
+  margin-bottom: 30px;
+  background: white;
+}
+
+#table-form th {
+  border: black 1px solid;
+  min-width: 6rem;
+  max-width: 8rem;
+  height: 2rem;
+  background: #f4f7f8;
+  margin: 0;
+}
+
+#table-form thead th{
+  padding: 0 20px;
+  background: #ffc1ce;
+}
+
+#table-form thead th:first-child{
+  background: #333;
+  color: #f4f4f4;
+}
+
+#table-form th input[type="number"] {
+  width: 100%;
+  height: 100%;
+  background: #f4f7f8;
+  border: 0;
+  font-size: 1rem;
+  padding: 0.3rem;
+  text-align: center;
+}
+
+#table-form th input[disabled] {
+  width: 100%;
+}
+
+#table-form .toggle-btn {
+  width: 100%;
+  height: 100%;
+  background: #f4f7f8;
+  border: 0;
+  font-size: 0.75rem;
+  padding: 0.3rem;
+  text-align: center;
+}
+
+#table-form .toggle-btn i {
+  width: 20px;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance:textfield;
+}
+
+input[value="Print"] {
+  position: relative;
+  left: 80%;
+  margin-bottom: 30px;
+}
+

@@ -1,0 +1,10 @@
+*
+!public/
+!public/css/
+!public/css/*
+!public/js/
+!public/js/*
+!resources/
+!resources/views/
+!resources/views/*
+!.gitignore
