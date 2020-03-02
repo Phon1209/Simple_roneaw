@@ -2,10 +2,11 @@
 
 var brown_fields = document.getElementsByClassName('brown');
 var brown_toggle = document.getElementById('brownType');
+var brown_pageperpaper = document.getElementById('brownPagePerPaper');
 
 brown_toggle.addEventListener('click',function(){
-  if(brown_toggle.innerHTML==="หน้า-หลัง")brown_toggle.innerHTML = "หน้าเดียว";
-  else brown_toggle.innerHTML = "หน้า-หลัง";
+  if(brown_toggle.innerHTML==="หน้า-หลัง")brown_toggle.innerHTML = "หน้าเดียว",brown_pageperpaper.value = "1";
+  else brown_toggle.innerHTML = "หน้า-หลัง",brown_pageperpaper.value = "2";
 })
 var updateBrownFunction = function() {
   var target = document.getElementById('brown-total');
@@ -27,10 +28,11 @@ brown_toggle.addEventListener('click',updateBrownFunction);
 
 var white_fields = document.getElementsByClassName('white');
 var white_toggle = document.getElementById('whiteType');
+var white_pageperpaper = document.getElementById('whitePagePerPaper');
 
 white_toggle.addEventListener('click',function(){
-  if(white_toggle.innerHTML==="หน้า-หลัง")white_toggle.innerHTML = "หน้าเดียว";
-  else white_toggle.innerHTML = "หน้า-หลัง";
+  if(white_toggle.innerHTML==="หน้า-หลัง")white_toggle.innerHTML = "หน้าเดียว",white_pageperpaper.value = "1";
+  else white_toggle.innerHTML = "หน้า-หลัง",white_pageperpaper.value = "2";
 })
 var updateWhiteFunction = function() {
   var target = document.getElementById('white-total');
@@ -52,10 +54,11 @@ white_toggle.addEventListener('click',updateWhiteFunction);
 
 var color_fields = document.getElementsByClassName('color');
 var color_toggle = document.getElementById('colorType');
+var color_pageperpaper = document.getElementById('colorPagePerPaper');
 
 color_toggle.addEventListener('click',function(){
-  if(color_toggle.innerHTML==="หน้า-หลัง")color_toggle.innerHTML = "หน้าเดียว";
-  else color_toggle.innerHTML = "หน้า-หลัง";
+  if(color_toggle.innerHTML==="หน้า-หลัง")color_toggle.innerHTML = "หน้าเดียว",color_pageperpaper.value = "1";
+  else color_toggle.innerHTML = "หน้า-หลัง",color_pageperpaper.value = "2";
 })
 var updateColorFunction = function() {
   var target = document.getElementById('color-total');
