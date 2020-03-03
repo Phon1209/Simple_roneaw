@@ -97,7 +97,6 @@ function validateInput(){
 function removeLeadingZero(){
   var allInput = document.querySelectorAll('#table-form th > input');
   for(var iter = 0; iter < allInput.length ;iter++){
-    alert(allInput[iter].value);
     allInput[iter].value = +allInput[iter].value;
   }
 }

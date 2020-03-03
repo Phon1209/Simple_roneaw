@@ -20,8 +20,10 @@
       <div>
         <button style="display:block;margin-left:auto" type="button" onclick="location.href='/logout'">Logout</button>
       </div>
-@isset($formError)
-      <div style="color:red;text-align:center">{{$formError}}</div>
+      @isset($formError)
+      <div class="error-layout">
+        <div class="error-box">{{$formError}}</div>
+      </div>
       @endisset
       <div class="panel">
       <section id="org-slct" class="slct">
