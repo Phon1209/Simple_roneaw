@@ -75,3 +75,62 @@ for(var iter = 0; iter < color_fields.length ;iter++)
   color_fields[iter].addEventListener('keyup',updateColorFunction,false);
 }
 color_toggle.addEventListener('click',updateColorFunction);
+
+function radioChecked(name){
+  var selector = 'input[name=\'' + name + '\']:checked';
+  var checkRadio = document.querySelector(selector);
+  return checkRadio !== null ? true:false;
+}
+
+function validateInput(){
+  var sum = 0;
+  var invalidData = false;
+  var unNullInput = document.getElementsByClassName('auto-fill');
+  for(var iter = 0; iter<unNullInput.length ;iter++){
+    if(unNullInput[iter].value == 0)unNullInput[iter].value = 0;
+    if(unNullInput[iter].value < 0)invalidData = true;
+    sum += +unNullInput[iter].value;
+  }
+  return [sum,invalidData];
+}
+
+function removeLeadingZero(){
+  var allInput = document.querySelectorAll('#table-form th > input');
+  for(var iter = 0; iter < allInput.length ;iter++){
+    alert(allInput[iter].value);
+    allInput[iter].value = +allInput[iter].value;
+  }
+}
+
+function formCheck()
+{
+  if(!radioChecked('org')){
+    alert('ยังไม่ได้เลือกหน่วยงาน');
+    return false;
+  }
+
+  if(!radioChecked('work')){
+    alert('ยังไม่ได้เลือกประเภทงาน');
+    return false;
+  }
+  
+  var [sum,invalidData] = validateInput();
+
+  updateBrownFunction();
+  updateWhiteFunction();
+  updateColorFunction();
+
+  if (sum === 0 && invalidData === false){
+    alert('ยังไม่ได้ใส่ข้อมูลกระดาษ');
+    return false;
+  }
+
+  if (invalidData){
+    alert('ข้อมูลกระดาษผิดพลาด');
+    return false;
+  }
+
+  removeLeadingZero();
+
+  return true;
+}

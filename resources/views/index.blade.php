@@ -14,17 +14,23 @@
     <title>Form</title>
   </head>
   <body>
-    <form action="/" method="post">
+    <form action="/" method="post" onsubmit="return formCheck()">
       @csrf
 
+      <div>
+        <button style="display:block;margin-left:auto" type="button" onclick="location.href='/logout'">Logout</button>
+      </div>
+@isset($formError)
+      <div style="color:red;text-align:center">{{$formError}}</div>
+      @endisset
       <div class="panel">
       <section id="org-slct" class="slct">
         <div class="inst"><h3>เลือกหน่วยงาน</h3></div>
         <div class="radio-slct">
-          <input type="radio" name="org" id="org1" value="1" />
-          <label for="org1">กลุ่มสาระการเรียนรู้คณิตศาสตร์</label>
-          <input type="radio" name="org" id="org2" value="2" />
-          <label for="org2">กลุ่มบริหารกิจการนักเรียน</label>
+@foreach ($organizationList as $idx=>$organization)
+          <input type="radio" name="org" id="org{{$idx+1}}" value="{{$idx+1}}" />
+          <label for="org{{$idx+1}}">{{$organization}}</label>
+@endforeach
         </div>
       </section>
       <section id="work-slct" class="slct">
@@ -54,24 +60,24 @@
           <tbody>
             <tr>
               <th class="bg-brown">กระดาษน้ำตาล</th>
-              <th><input id="brownPageOrigin" class="brown" type="number" name="brownPageOrigin"></th>
-              <th><input id="brownCopy" class="brown" type="number" name="brownCopy"></th>
+              <th><input id="brownPageOrigin" class="brown auto-fill" type="number" name="brownPageOrigin"></th>
+              <th><input id="brownCopy" class="brown auto-fill" type="number" name="brownCopy"></th>
               <th><input id="brownPagePerPaper" type="hidden" name="brownPagePerPaper" value="2"><div id="brownType" class="toggle-btn">หน้า-หลัง</div></th>
               <th><input type="number" id="brownPerCopy" disabled="disabled"></th>
               <th><input id="brown-total" type="number" name="brownTotal" disabled="disabled"></th>
             </tr>
             <tr>
               <th class="bg-white">กระดาษขาว</th>
-              <th><input id="whitePageOrigin" class="white" type="number" name="whitePageOrigin"></th>
-              <th><input id="whiteCopy" class="white" type="number" name="whiteCopy"></th>
+              <th><input id="whitePageOrigin" class="white auto-fill" type="number" name="whitePageOrigin"></th>
+              <th><input id="whiteCopy" class="white auto-fill" type="number" name="whiteCopy"></th>
               <th><input id="whitePagePerPaper" type="hidden" name="whitePagePerPaper" value="2"><div id="whiteType" class="toggle-btn" >หน้า-หลัง</div></th>
               <th><input type="number" id="whitePerCopy" disabled="disabled"></th>
               <th><input id="white-total" type="number" name="whiteTotal" disabled="disabled"></th>
             </tr>
             <tr>
               <th class="bg-pink">กระดาษสี</th>
-              <th><input id="colorPageOrigin" class="color" type="number" name="colorPageOrigin"></th>
-              <th><input id="colorCopy" class="color" type="number" name="colorCopy"></th>
+              <th><input id="colorPageOrigin" class="color auto-fill" type="number" name="colorPageOrigin"></th>
+              <th><input id="colorCopy" class="color auto-fill" type="number" name="colorCopy"></th>
               <th><input id="colorPagePerPaper" type="hidden" name="colorPagePerPaper" value="2"><div id="colorType" class="toggle-btn" >หน้า-หลัง</div></th>
               <th><input type="number" id="colorPerCopy" disabled="disabled"></th>
               <th><input id="color-total" type="number" name="colorTotal" disabled="disabled"></th>

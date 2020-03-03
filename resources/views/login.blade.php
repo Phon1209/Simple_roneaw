@@ -29,8 +29,8 @@
         <div class="form-group">
           <h1>Roneaw</h1>
           <div class="line"></div>
-@isset($loginMSG)
-            <label id="error">{{$loginMSG}}</label>
+@isset($loginError)
+            <label id="error">{{$loginError}}</label>
 @endisset
             @csrf
 
