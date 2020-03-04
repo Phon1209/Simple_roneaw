@@ -101,15 +101,27 @@ function removeLeadingZero(){
   }
 }
 
+function callError(id)
+{
+  var element = document.getElementById(id);
+  if(element.classList.contains('popup-error')){
+    var newOne = element.cloneNode(true);
+    element.parentNode.replaceChild(newOne,element);
+  }
+  else {
+    element.classList.toggle('popup-error');
+  }
+}
+
 function formCheck()
 {
   if(!radioChecked('org')){
-    alert('ยังไม่ได้เลือกหน่วยงาน');
+    callError("org-error");
     return false;
   }
 
   if(!radioChecked('work')){
-    alert('ยังไม่ได้เลือกประเภทงาน');
+    callError('work-error');
     return false;
   }
   
@@ -120,12 +132,12 @@ function formCheck()
   updateColorFunction();
 
   if (sum === 0 && invalidData === false){
-    alert('ยังไม่ได้ใส่ข้อมูลกระดาษ');
+    callError('blank-paper-error');
     return false;
   }
 
   if (invalidData){
-    alert('ข้อมูลกระดาษผิดพลาด');
+    callError('invalid-paper-error');
     return false;
   }
 

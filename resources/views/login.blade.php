@@ -30,7 +30,9 @@
           <h1>Roneaw</h1>
           <div class="line"></div>
 @isset($loginError)
-            <label id="error">{{$loginError}}</label>
+            <div class="error-layout">
+              <div class="error-box">{{$loginError}}</div>
+            </div>
 @endisset
             @csrf
 

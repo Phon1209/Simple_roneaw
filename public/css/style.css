@@ -10,8 +10,11 @@
   --primary-color: #ffc1ce;
   --secondary-color: #bbf6fe;
   --light-primary-color: #FFD7DF;
+  --hamburger-color: #333;
 }
-
+::-webkit-scrollbar {
+  display: none;
+}
 
 html , body{
   font-family: 'Mali', cursive;
@@ -54,7 +57,7 @@ p {
 .cap-1100{min-width: 1100px;}
 
 .btn:hover{
-  background: #ffc1ce;
+  background: var(--primary-color);
 }
 
 .bg-brown {
@@ -66,7 +69,7 @@ p {
 }
 
 .bg-pink {
-  background: #FFD7DF!important;
+  background: var(--light-primary-color)!important;
 }
 
 .v-large-btn {
@@ -84,7 +87,7 @@ p {
 
 .btn {
   padding: 10px;
-  background: #FFD7DF;
+  background: var(--light-primary-color);
   border: 1px #333 solid;
   border-radius: 5px;
   cursor: pointer;
@@ -108,6 +111,7 @@ p {
   background: var(--light-primary-color);
   color: red;
   border-radius: 10px;
+  border: 2px red solid;
 }
 
 @keyframes fading {
@@ -124,7 +128,7 @@ p {
 /* Navbar */
 #navbar{
   overflow: auto;
-  background-color: #ffc1ce;
+  background-color: var(--primary-color);
 }
 
 #navbar ul {
@@ -144,13 +148,150 @@ p {
 }
 
 #navbar ul li a.current{
-  background: #FFD7DF;
+  background: var(--light-primary-color);
   color: rgb(168, 53, 11);
 }
 
 #navbar ul li a:hover{
-  background: #FFD7DF;
+  background: var(--light-primary-color);
   color: rgb(168, 53, 11);
+}
+
+/* Sidebar Utilities */
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.sidebar .toggler {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 50px;
+  height: 50px;
+  z-index: 2;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.sidebar .hamburger {
+  width: 50px;
+  height: 50px;
+  padding: 7.5px;
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.sidebar .hamburger > div {
+  height: 4px;
+  width: 100%;
+  top: -10px;
+  position: relative;
+  background: var(--hamburger-color);
+  border-radius: 4px;
+  transition: background-color 0s 0.13s linear;
+}
+
+.sidebar .hamburger > div:before,
+.sidebar .hamburger > div:after {
+  content: '';
+  border-radius: 4px;
+  position: absolute;
+  height: 4px;
+  width: 100%;
+  background: var(--hamburger-color);
+}
+
+.sidebar .hamburger > div:before {
+  top: 10px;
+  transition: top 0.1s 0.2s cubic-bezier(0.33333, 0.66667, 0.66667, 1), transform 0.13s cubic-bezier(0.55, 0.055, 0.675, 0.19), background-color 0.2s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+}
+.sidebar .hamburger > div:after {
+  top: 20px;
+  transition: top 0.2s 0.2s cubic-bezier(0.33333, 0.66667, 0.66667, 1), transform 0.13s cubic-bezier(0.55, 0.055, 0.675, 0.19), background-color 0.2s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+}
+
+/* Sidebar Toggle Animation */
+.sidebar .toggler:checked + .hamburger > div {
+  background-color: transparent !important;
+}
+.sidebar .toggler:checked + .hamburger > div:before {
+  top: 0;
+  transition: top 0.1s 0.15s cubic-bezier(0.33333, 0, 0.66667, 0.33333), transform 0.13s 0.22s cubic-bezier(0.215, 0.61, 0.355, 1);
+  transform: translate3d(0, 10px, 0) rotate(45deg);
+  background: var(--light-primary-color);
+}
+.sidebar .toggler:checked + .hamburger > div:after {
+  top: 0;
+  transition: top 0.2s cubic-bezier(0.33333, 0, 0.66667, 0.33333), transform 0.13s 0.22s cubic-bezier(0.215, 0.61, 0.355, 1);
+  transform: translate3d(0, 10px, 0) rotate(-45deg);
+  background: var(--light-primary-color);
+}
+.sidebar .toggler:checked ~ .menu {
+  transform: translate(0,0);
+}
+
+/* Sidebar Styling */
+.sidebar .menu {
+  background: rgba(48,48,48,0.92);
+  width: 200px;
+  height: 100vh;
+  overflow: hidden;
+  position: fixed;
+  transition: all 0.5s ease;
+  padding-top: 50px;
+  color: #fff;
+  transform: translate(-200px,0);
+}
+
+.sidebar .menu ul.menu-list {
+  padding: 10px;
+  list-style: none;
+}
+
+.sidebar .menu ul.menu-list li {
+  margin: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebar .menu .menu-list li a {
+  color: #fff;
+  display: block;
+  width: 100%;
+  text-align: center;
+  list-style: none;
+  border-radius: 5px;
+  transition: box-shadow 0.3s ease ;
+}
+
+.sidebar .menu .menu-list li.current a {
+  background: var(--light-primary-color);
+  color: #333;
+}
+
+.sidebar .menu ul.menu-list li a:hover {
+  /* background: var(--light-primary-color); */
+  /* border: 2px var(--light-primary-color) solid; */
+  box-shadow: inset 0px 0px 0px 2px var(--light-primary-color);
+  /* color: #333; */
+}
+
+.sidebar .menu ul.menu-list li:last-child a {
+  color: red;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.sidebar .menu ul.menu-list li:last-child a:hover {
+  background: red;
+  color: #fff;
+  box-shadow: none;
 }
 
 /* Section: Login (Page: Login)*/
@@ -212,7 +353,7 @@ p {
 /* Section: Select Organization (Page: Form) */
 
 .slct .inst {
-  background: #ffc1ce;
+  background: var(--primary-color);
   text-align: center;
 }
 
@@ -249,14 +390,14 @@ p {
 }
 
 .slct input[type="radio"]:checked + label {
-  background-color:#FFD7DF;
+  background-color:var(--light-primary-color);
   border-color: white;
   border: rgb(224, 202, 194) 2px solid;
   font-weight: bolder;
 }
 
 .slct input[type="radio"]:hover + label {
-  border: 2px dashed #ffc1ce;
+  border: 2px dashed var(--primary-color);
 }
 
 .panel {
@@ -323,7 +464,7 @@ p {
 
 #table-form thead th{
   padding: 0 20px;
-  background: #ffc1ce;
+  background: var(--primary-color);
 }
 
 #table-form thead th:first-child{
@@ -355,20 +496,42 @@ p {
   text-align: center;
 }
 
-/* Chrome, Safari, Edge, Opera */
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
+/* Remove arrow up/down in input tag */
+    /* Chrome, Safari, Edge, Opera */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
 
-/* Firefox */
-input[type=number] {
-  -moz-appearance:textfield;
-}
+    /* Firefox */
+    input[type=number] {
+      -moz-appearance:textfield;
+    }
 
-input[value="Print"] {
-  position: relative;
-  left: 80%;
-  margin-bottom: 30px;
-}
+    input[value="PRINT"] {
+      font-family: inherit;
+      position: relative;
+      left: 80%;
+      margin-bottom: 30px;
+    }
+    
+    /* Error Handler */
+    
+    .hidden-error {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      visibility: hidden;
+    }
+    
+    .popup-error {
+      visibility: visible;
+      animation: fading 2s ease-out forwards 1s;
+    }

@@ -14,17 +14,48 @@
     <title>Form</title>
   </head>
   <body>
+    <section class="sidebar">
+      <input type="checkbox" class="toggler"/>
+      <div class="hamburger">
+        <div></div>
+       </div>
+      <div class="menu">
+        <div>
+          <ul class="menu-list">
+            <li class="current"><a href="#">PRINT</a></li>
+            <li><a href="#">HISTORY</a></li>
+            <li><a href="#">HELP</a></li>
+            <li><a href="/logout">LOGOUT</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
     <form action="/" method="post" onsubmit="return formCheck()">
       @csrf
 
-      <div>
+      <!-- <div>
         <button style="display:block;margin-left:auto" type="button" onclick="location.href='/logout'">Logout</button>
-      </div>
+      </div> -->
       @isset($formError)
       <div class="error-layout">
         <div class="error-box">{{$formError}}</div>
       </div>
       @endisset
+
+      <!-- Form Error Popup -->
+      <div id="org-error" class="hidden-error">
+        <div class="error-box">ยังไม่ได้เลือกหน่วยงาน</div>
+      </div>
+      <div id="work-error" class="hidden-error">
+        <div class="error-box">ยังไม่ได้เลือกประเภทงาน</div>
+      </div>
+      <div id="blank-paper-error" class="hidden-error">
+        <div class="error-box">ยังไม่ได้ใส่ข้อมูลกระดาษ</div>
+      </div>
+      <div id="invalid-paper-error" class="hidden-error">
+        <div class="error-box">ข้อมูลกระดาษผิดพลาด</div>
+      </div>
+
       <div class="panel">
       <section id="org-slct" class="slct">
         <div class="inst"><h3>เลือกหน่วยงาน</h3></div>
@@ -87,7 +118,7 @@
 
           </tbody>
         </table>
-        <input type="submit" value="Print" class="btn v-large-btn">
+        <input type="submit" value="PRINT" class="btn v-large-btn">
         <script src="js/table_form.js"></script>
 
       </section>
