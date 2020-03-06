@@ -36,33 +36,53 @@
         width: 100%;
         margin: auto;
         border-collapse: collapse;
+        margin-top: 3rem;
       }
       table, th, td {
         border: 1px solid black;
       }
       block {
         display: block;
-        margin-bottom: 20px;
       }
       
       .pdfheader{
         padding: 3rem 0;
+        text-align:center;
       }
 
-      .pdfheader header {
+      .pdfheader .header {
         font-size: 1.4rem;
         font-weight: bold;
+        text-align:center;
       }
+
+      .pdfbody .bold {
+        font-weight: bold;
+        font-size: 1.1rem;
+      }
+
+      .pdfsignature {
+        margin-top: 90px;
+        margin-left: 50%;
+      }
+      .pdfsignature .signature {
+        display: inline-block;
+      }
+
+      .pdfsignature .signature p {
+        text-align: center;
+      }
+
     </style>
   </head>
   <body>
-    <div class="pdfheader">
+  <div class="pdfheader">
       <block><img src="{{storage_path('/images/sk_logo.png')}}" width="100px"></block>
       <block class="header">โรงเรียนสวนกุหลาบวิทยาลัย</block>
     </div>
     <div class="pdfbody">
-      <block>วันที่ {{date("d/m/Y")}} เวลา {{date("H:i:s")}}</block>
-      <block>จัดทำ: {{$translate['WorkType'][$orderData['WorkType']]}}</block>
+      <block><span class="bold">วันที่</span> {{date("d/m/Y")}} เวลา {{date("H:i:s")}}</block>
+      <block><span class="bold">จัดทำ: </span> {{$translate['WorkType'][$orderData['WorkType']]}}</block>
       <block>
         <table>
           <thead>
@@ -97,9 +117,9 @@
       </block>
       <div class="pdfsignature">
         <div class="signature">
-          ลงชื่อ.................................................................<br>
-          ({{$userData->DisplayName}})<br>
-          {{$organizationName}}
+          <p>ลงชื่อ.................................................................</p>
+          <p>({{$userData->DisplayName}})</p>
+          <p>{{$organizationName}}</p>
         </div>
       </div>
     </div>
