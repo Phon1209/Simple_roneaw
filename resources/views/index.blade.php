@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href="css/style.css" />
-    <!-- <link
+    <link
       rel="stylesheet"
       media="screen and (max-width: 880px)"
       href="css/mobile.css"
-    /> -->
+    />
     <link href="https://fonts.googleapis.com/css?family=Athiti|Kanit|Mali&display=swap" rel="stylesheet">
     <title>Form</title>
   </head>
@@ -33,9 +33,6 @@
     <form action="/" method="post" onsubmit="return formCheck()">
       @csrf
 
-      <!-- <div>
-        <button style="display:block;margin-left:auto" type="button" onclick="location.href='/logout'">Logout</button>
-      </div> -->
       @isset($formError)
       <div class="error-layout">
         <div class="error-box">{{$formError}}</div>
@@ -115,12 +112,15 @@
               <th><input type="number" id="colorPerCopy" disabled="disabled"></th>
               <th><input id="color-total" type="number" name="colorTotal" disabled="disabled"></th>
             </tr>
-
           </tbody>
         </table>
         <input type="submit" value="PRINT" class="btn v-large-btn">
         <script src="js/table_form.js"></script>
-
+@if ($openPDF)
+        <div class="pdf-layout">
+          <div class="pdf-box" onclick="openPDF()">Click เพื่อ Print PDF</div>
+        </div>
+@endif
       </section>
     </form>
   </body>

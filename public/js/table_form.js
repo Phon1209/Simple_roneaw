@@ -124,7 +124,7 @@ function formCheck()
     callError('work-error');
     return false;
   }
-  
+
   var [sum,invalidData] = validateInput();
 
   updateBrownFunction();
@@ -144,4 +144,12 @@ function formCheck()
   removeLeadingZero();
 
   return true;
+}
+
+function openPDF()
+{
+  window.open('/Report');
+  var elementList=document.getElementsByClassName('pdf-layout');
+  for(var i=0;i<elementList.length;i++)
+  elementList[i].parentNode.removeChild(elementList[i]);
 }

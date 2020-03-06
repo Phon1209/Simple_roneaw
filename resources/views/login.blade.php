@@ -5,17 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href="css/style.css" />
-    <!-- <link
+    <link
       rel="stylesheet"
       media="screen and (max-width: 880px)"
       href="css/mobile.css"
-    /> -->
+    />
     <link href="https://fonts.googleapis.com/css?family=Athiti|Kanit|Mali|Roboto+Condensed|Source+Sans+Pro&display=swap" rel="stylesheet">
     <title>Home</title>
   </head>
   <body>
-    <section class="sidebar">
-    <input type="checkbox" class="toggler"/>
+  <section class="sidebar">
+      <input type="checkbox" class="toggler"/>
       <div class="hamburger">
         <div></div>
        </div>

@@ -125,6 +125,7 @@ p {
   }
 }
 
+
 /* Sidebar Utilities */
 
 .sidebar {
@@ -251,24 +252,24 @@ p {
   /* color: #333; */
 }
 
-.sidebar .menu ul.menu-list li:last-child a[href="/logout"] {
+.sidebar .menu ul.menu-list li a[href="/logout"] {
   color: red;
   transition: background 0.3s ease, color 0.3s ease;
 }
 
-.sidebar .menu ul.menu-list li:last-child a[href="/logout"]:hover {
+.sidebar .menu ul.menu-list li a[href="/logout"]:hover {
   background: red;
   color: #fff;
   box-shadow: none;
 }
 
 /* Section: Login (Page: Login)*/
+
 #login-form {
-  width: 100vw;
-  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 100vh;
 }
 
 #login-form .form-group {
@@ -471,6 +472,27 @@ p {
   text-align: center;
 }
 
+.pdf-layout {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: rgba(0,0,0,0.75);
+}
+
+.pdf-box {
+  padding: 1.5rem 2rem;
+  background: var(--light-primary-color);
+  color: red;
+  border-radius: 10px;
+  border: 2px red solid;
+}
+
 /* Remove arrow up/down in input tag */
     /* Chrome, Safari, Edge, Opera */
     input::-webkit-outer-spin-button,
@@ -490,9 +512,9 @@ p {
       left: 80%;
       margin-bottom: 30px;
     }
-    
+
     /* Error Handler */
-    
+
     .hidden-error {
       position: fixed;
       top: 0;
@@ -505,7 +527,7 @@ p {
       text-align: center;
       visibility: hidden;
     }
-    
+
     .popup-error {
       visibility: visible;
       animation: fading 2s ease-out forwards 1s;
