@@ -14,15 +14,20 @@
     <title>Home</title>
   </head>
   <body>
-    <header>
-      <nav id="navbar">
-        <div class="container">
-          <ul>
-            <li><a href="/" class="current">Home</a></li>
+    <section class="sidebar">
+    <input type="checkbox" class="toggler"/>
+      <div class="hamburger">
+        <div></div>
+       </div>
+      <div class="menu">
+        <div>
+          <ul class="menu-list">
+            <li class="current"><a href="#">LOGIN</a></li>
+            <li><a href="#">HELP</a></li>
           </ul>
         </div>
-      </nav>
-    </header>
+      </div>
+    </section>
     <section id="login-form">
       <div class="container">
         <form action="/login" method="post">
