@@ -449,10 +449,7 @@ p {
 }
 
 #table-form th input[type="number"] {
-  width: 100%;
-  height: 100%;
   background: #f4f7f8;
-  border: 0;
   font-size: 1rem;
   padding: 0.3rem;
   text-align: center;
@@ -460,16 +457,38 @@ p {
 
 #table-form th input[disabled] {
   width: 100%;
+  height: 100%;
+  border: 0;
+  background: #e6e6e6;
 }
 
 #table-form .toggle-btn {
-  width: 100%;
-  height: 100%;
+  /* width: 100%;
+  height: 100%; */
+  display: inline;
   background: #f4f7f8;
   border: 0;
   font-size: 0.75rem;
-  padding: 0.3rem;
+  padding-bottom: 0.1rem;
   text-align: center;
+}
+
+#table-form i {
+  display: inline;
+  margin: 12px;
+  color: #7fbfc9;
+}
+
+#table-form input.auto-fill {
+  width: 85%;
+  border-radius: 0.2rem;
+  padding: 0.3rem;
+  margin: 5% 0;
+  border-width: 1.5px;
+}
+
+#table-form .content-center {
+  /* padding: 0.1rem 0; */
 }
 
 .pdf-layout {

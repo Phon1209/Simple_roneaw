@@ -10,6 +10,7 @@
       media="screen and (max-width: 880px)"
       href="css/mobile.css"
     />
+    <script src="https://kit.fontawesome.com/744c1f376a.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css?family=Athiti|Kanit|Mali&display=swap" rel="stylesheet">
     <title>Form</title>
   </head>
@@ -90,25 +91,25 @@
           <tbody>
             <tr>
               <th class="bg-brown">กระดาษน้ำตาล</th>
-              <th><input id="brownPageOrigin" class="brown auto-fill" type="number" name="brownPageOrigin"></th>
-              <th><input id="brownCopy" class="brown auto-fill" type="number" name="brownCopy"></th>
-              <th><input id="brownPagePerPaper" type="hidden" name="brownPagePerPaper" value="2"><div id="brownType" class="toggle-btn">หน้า-หลัง</div></th>
+              <th class="content-center"><input id="brownPageOrigin" class="brown auto-fill" type="number" name="brownPageOrigin"></th>
+              <th class="content-center"><input id="brownCopy" class="brown auto-fill" type="number" name="brownCopy"></th>
+              <th><input id="brownPagePerPaper" type="hidden" name="brownPagePerPaper" value="2"><i class="fas fa-chevron-circle-left"></i><div id="brownType" class="toggle-btn">หน้า-หลัง</div><i class="fas fa-chevron-circle-right"></i></th>
               <th><input type="number" id="brownPerCopy" disabled="disabled"></th>
               <th><input id="brown-total" type="number" name="brownTotal" disabled="disabled"></th>
             </tr>
             <tr>
               <th class="bg-white">กระดาษขาว</th>
-              <th><input id="whitePageOrigin" class="white auto-fill" type="number" name="whitePageOrigin"></th>
-              <th><input id="whiteCopy" class="white auto-fill" type="number" name="whiteCopy"></th>
-              <th><input id="whitePagePerPaper" type="hidden" name="whitePagePerPaper" value="2"><div id="whiteType" class="toggle-btn" >หน้า-หลัง</div></th>
+              <th class="content-center"><input id="whitePageOrigin" class="white auto-fill" type="number" name="whitePageOrigin"></th>
+              <th class="content-center"><input id="whiteCopy" class="white auto-fill" type="number" name="whiteCopy"></th>
+              <th><input id="whitePagePerPaper" type="hidden" name="whitePagePerPaper" value="2"><i class="fas fa-chevron-circle-left"></i><div id="whiteType" class="toggle-btn" >หน้า-หลัง</div><i class="fas fa-chevron-circle-right"></i></th>
               <th><input type="number" id="whitePerCopy" disabled="disabled"></th>
               <th><input id="white-total" type="number" name="whiteTotal" disabled="disabled"></th>
             </tr>
             <tr>
               <th class="bg-pink">กระดาษสี</th>
-              <th><input id="colorPageOrigin" class="color auto-fill" type="number" name="colorPageOrigin"></th>
-              <th><input id="colorCopy" class="color auto-fill" type="number" name="colorCopy"></th>
-              <th><input id="colorPagePerPaper" type="hidden" name="colorPagePerPaper" value="2"><div id="colorType" class="toggle-btn" >หน้า-หลัง</div></th>
+              <th class="content-center"><input id="colorPageOrigin" class="color auto-fill" type="number" name="colorPageOrigin"></th>
+              <th class="content-center"><input id="colorCopy" class="color auto-fill" type="number" name="colorCopy"></th>
+              <th><input id="colorPagePerPaper" type="hidden" name="colorPagePerPaper" value="2"><i class="fas fa-chevron-circle-left"></i><div id="colorType" class="toggle-btn" >หน้า-หลัง</div><i class="fas fa-chevron-circle-right"></i></th>
               <th><input type="number" id="colorPerCopy" disabled="disabled"></th>
               <th><input id="color-total" type="number" name="colorTotal" disabled="disabled"></th>
             </tr>
