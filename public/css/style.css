@@ -477,6 +477,7 @@ p {
   display: inline;
   margin: 12px;
   color: #7fbfc9;
+  cursor: pointer;
 }
 
 #table-form input.auto-fill {

@@ -4,14 +4,13 @@ var brown_fields = document.getElementsByClassName('brown');
 var brown_toggle = document.getElementById('brownType');
 var brown_pageperpaper = document.getElementById('brownPagePerPaper');
 
-document.getElementById('brown-toggler').addEventListener('click', () => {
-  if(brown_toggle.innerHTML==="หน้า-หลัง")brown_toggle.innerHTML = "หน้าเดียว",brown_pageperpaper.value = "1";
-  else brown_toggle.innerHTML = "หน้า-หลัง",brown_pageperpaper.value = "2";
+document.querySelectorAll('#brown-toggler i').forEach(element => {
+  element.addEventListener('click', () => {
+    if(brown_toggle.innerHTML==="หน้า-หลัง")brown_toggle.innerHTML = "หน้าเดียว",brown_pageperpaper.value = "1";
+    else brown_toggle.innerHTML = "หน้า-หลัง",brown_pageperpaper.value = "2";
+  });
 })
-brown_toggle.addEventListener('click',function(){
-  if(brown_toggle.innerHTML==="หน้า-หลัง")brown_toggle.innerHTML = "หน้าเดียว",brown_pageperpaper.value = "1";
-  else brown_toggle.innerHTML = "หน้า-หลัง",brown_pageperpaper.value = "2";
-})
+
 var updateBrownFunction = function() {
   var target = document.getElementById('brown-total');
   var origin = document.getElementById('brownPageOrigin');
@@ -39,8 +38,9 @@ const white_toggler = () => {
   if(white_toggle.innerHTML==="หน้า-หลัง")white_toggle.innerHTML = "หน้าเดียว",white_pageperpaper.value = "1";
   else white_toggle.innerHTML = "หน้า-หลัง",white_pageperpaper.value = "2";
 }
-document.getElementById('white-toggler').addEventListener('click',white_toggler);
-white_toggle.addEventListener('click',white_toggler);
+document.querySelectorAll('#white-toggler i').forEach(element => {
+  element.addEventListener('click',white_toggler);
+})
 
 var updateWhiteFunction = function() {
   var target = document.getElementById('white-total');
@@ -68,8 +68,9 @@ const color_toggler = () => {
   if(color_toggle.innerHTML==="หน้า-หลัง")color_toggle.innerHTML = "หน้าเดียว",color_pageperpaper.value = "1";
   else color_toggle.innerHTML = "หน้า-หลัง",color_pageperpaper.value = "2";
 }
-document.getElementById('color-toggler').addEventListener('click',color_toggler);
-color_toggle.addEventListener('click',color_toggler);
+document.querySelectorAll('#color-toggler i').forEach(element => {
+  element.addEventListener('click',color_toggler);
+})
 var updateColorFunction = function() {
   var target = document.getElementById('color-total');
   var origin = document.getElementById('colorPageOrigin');

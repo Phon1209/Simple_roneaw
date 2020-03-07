@@ -94,24 +94,24 @@
               <th class="content-center"><input id="brownPageOrigin" class="brown auto-fill" type="number" name="brownPageOrigin"></th>
               <th class="content-center"><input id="brownCopy" class="brown auto-fill" type="number" name="brownCopy"></th>
               <th id="brown-toggler"><input id="brownPagePerPaper" type="hidden" name="brownPagePerPaper" value="2"><i class="fas fa-chevron-circle-left"></i><div id="brownType" class="toggle-btn">หน้า-หลัง</div><i class="fas fa-chevron-circle-right"></i></th>
-              <th><input type="number" id="brownPerCopy" disabled="disabled"></th>
-              <th><input id="brown-total" type="number" name="brownTotal" disabled="disabled"></th>
+              <th><input type="number" id="brownPerCopy" disabled="disabled" value="0"></th>
+              <th><input id="brown-total" type="number" name="brownTotal" disabled="disabled" value="0"></th>
             </tr>
             <tr>
               <th class="bg-white">กระดาษขาว</th>
               <th class="content-center"><input id="whitePageOrigin" class="white auto-fill" type="number" name="whitePageOrigin"></th>
               <th class="content-center"><input id="whiteCopy" class="white auto-fill" type="number" name="whiteCopy"></th>
               <th id="white-toggler"><input id="whitePagePerPaper" type="hidden" name="whitePagePerPaper" value="2"><i class="fas fa-chevron-circle-left"></i><div id="whiteType" class="toggle-btn" >หน้า-หลัง</div><i class="fas fa-chevron-circle-right"></i></th>
-              <th><input type="number" id="whitePerCopy" disabled="disabled"></th>
-              <th><input id="white-total" type="number" name="whiteTotal" disabled="disabled"></th>
+              <th><input type="number" id="whitePerCopy" disabled="disabled" value="0"></th>
+              <th><input id="white-total" type="number" name="whiteTotal" disabled="disabled" value="0"></th>
             </tr>
             <tr>
               <th class="bg-pink">กระดาษสี</th>
               <th class="content-center"><input id="colorPageOrigin" class="color auto-fill" type="number" name="colorPageOrigin"></th>
               <th class="content-center"><input id="colorCopy" class="color auto-fill" type="number" name="colorCopy"></th>
               <th id="color-toggler"><input id="colorPagePerPaper" type="hidden" name="colorPagePerPaper" value="2"><i class="fas fa-chevron-circle-left"></i><div id="colorType" class="toggle-btn" >หน้า-หลัง</div><i class="fas fa-chevron-circle-right"></i></th>
-              <th><input type="number" id="colorPerCopy" disabled="disabled"></th>
-              <th><input id="color-total" type="number" name="colorTotal" disabled="disabled"></th>
+              <th><input type="number" id="colorPerCopy" disabled="disabled" value="0"></th>
+              <th><input id="color-total" type="number" name="colorTotal" disabled="disabled" value="0"></th>
             </tr>
           </tbody>
         </table>
