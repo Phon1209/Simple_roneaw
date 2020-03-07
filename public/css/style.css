@@ -488,6 +488,11 @@ p {
   border-width: 1.5px;
 }
 
+#table-form i.hide {
+  opacity: 0;
+  visibility: hidden;
+}
+
 
 .pdf-layout {
   position: fixed;

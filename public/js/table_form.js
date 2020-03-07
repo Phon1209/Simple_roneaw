@@ -14,11 +14,25 @@ var updateBrownFunction = function() {
   target.value =Math.ceil(origin.value/fraction)*(copy.value);
 }
 
+const switch_button = element => {
+  var sibling = element.parentNode.firstChild;
+  while(sibling){
+    console.log(sibling.tagName);
+    
+    if(sibling.nodeType === 1 && sibling.tagName === 'I'){
+      sibling.classList.toggle('hide');
+    }
+    sibling = sibling.nextSibling;
+  }
+}
+
+const brown_toggler = (e) => {
+  if(brown_toggle.innerHTML==="หน้า-หลัง")brown_toggle.innerHTML = "หน้าเดียว",brown_pageperpaper.value = "1";
+  else brown_toggle.innerHTML = "หน้า-หลัง",brown_pageperpaper.value = "2";
+  switch_button(e.target);
+}
 document.querySelectorAll('#brown-toggler i').forEach(element => {
-  element.addEventListener('click', () => {
-    if(brown_toggle.innerHTML==="หน้า-หลัง")brown_toggle.innerHTML = "หน้าเดียว",brown_pageperpaper.value = "1";
-    else brown_toggle.innerHTML = "หน้า-หลัง",brown_pageperpaper.value = "2";
-  });
+  element.addEventListener('click', brown_toggler);
   element.addEventListener('click',updateBrownFunction);
 })
 
@@ -35,9 +49,10 @@ var white_toggle = document.getElementById('whiteType');
 var white_pageperpaper = document.getElementById('whitePagePerPaper');
 
 
-const white_toggler = () => {
+const white_toggler = (e) => {
   if(white_toggle.innerHTML==="หน้า-หลัง")white_toggle.innerHTML = "หน้าเดียว",white_pageperpaper.value = "1";
   else white_toggle.innerHTML = "หน้า-หลัง",white_pageperpaper.value = "2";
+  switch_button(e.target);
 }
 
 var updateWhiteFunction = function() {
@@ -66,9 +81,10 @@ var color_fields = document.getElementsByClassName('color');
 var color_toggle = document.getElementById('colorType');
 var color_pageperpaper = document.getElementById('colorPagePerPaper');
 
-const color_toggler = () => {
+const color_toggler = (e) => {
   if(color_toggle.innerHTML==="หน้า-หลัง")color_toggle.innerHTML = "หน้าเดียว",color_pageperpaper.value = "1";
   else color_toggle.innerHTML = "หน้า-หลัง",color_pageperpaper.value = "2";
+  switch_button(e.target);
 }
 var updateColorFunction = function() {
   var target = document.getElementById('color-total');
