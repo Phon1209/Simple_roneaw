@@ -17,7 +17,7 @@
 }
 
 html , body{
-  font-family: 'Mali', cursive;
+  font-family: 'Mali', Arial, Helvetica, sans-serif;
   line-height: 1.7em;
   font-size: 30px;
   background:var(--secondary-color);
@@ -376,6 +376,10 @@ p {
   border: 2px dashed var(--primary-color);
 }
 
+header.heading {
+  display: none;
+}
+
 .panel {
   margin-top: 30px;
   display: flex;
@@ -449,7 +453,6 @@ p {
 }
 
 #table-form th input[type="number"] {
-  background: #f4f7f8;
   font-size: 1rem;
   padding: 0.3rem;
   text-align: center;
@@ -493,6 +496,9 @@ p {
   visibility: hidden;
 }
 
+#table-form .grid-table {
+  display: none;
+}
 
 .pdf-layout {
   position: fixed;

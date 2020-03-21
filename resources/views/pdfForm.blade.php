@@ -44,7 +44,7 @@
       block {
         display: block;
       }
-      
+
       .pdfheader{
         padding: 3rem 0;
         text-align:center;
