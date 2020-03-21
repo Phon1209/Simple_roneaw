@@ -93,6 +93,11 @@
     grid-template-columns: 1fr 4fr;
   }
 
+  #table-form .grid-table .item:nth-child(1) {
+    background: #333;
+    color: #f4f4f4;
+  }
+
   #table-form .grid-table .item:nth-child(3n){
     display: flex;
     align-items: center;
