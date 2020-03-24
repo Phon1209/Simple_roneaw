@@ -17,7 +17,8 @@ var updateBrownFunction = function() {
 const switch_button = element => {
   var sibling = element.parentNode.firstChild;
   while(sibling){
-
+    console.log(sibling.tagName);
+    
     if(sibling.nodeType === 1 && sibling.tagName === 'I'){
       sibling.classList.toggle('hide');
     }
@@ -123,25 +124,6 @@ function validateInput(){
   return [sum,invalidData];
 }
 
-function zeroPaper(){
-  var sum = 0;
-  var invalidPaper = false;
-  if(document.getElementById('brown-total').value < 0){
-    invalidPaper = true;
-  }
-  else sum += (document.getElementById('brown-total').value);
-  if(document.getElementById('white-total').value < 0){
-    invalidPaper = true;
-  }
-  else sum += (document.getElementById('white-total').value);
-  if(document.getElementById('color-total').value < 0){
-    invalidPaper = true;
-  }
-  else sum += (document.getElementById('color-total').value);
-  if(sum <=0 )invalidPaper = true;
-  return invalidPaper;
-}
-
 function removeLeadingZero(){
   var allInput = document.querySelectorAll('#table-form th > input');
   for(var iter = 0; iter < allInput.length ;iter++){
@@ -184,7 +166,7 @@ function formCheck()
     return false;
   }
 
-  if (invalidData || zeroPaper()){
+  if (invalidData){
     callError('invalid-paper-error');
     return false;
   }
@@ -201,137 +183,3 @@ function openPDF()
   for(var i=0;i<elementList.length;i++)
   elementList[i].parentNode.removeChild(elementList[i]);
 }
-
-// Mobile Form Section
-
-const decrementInput = e => {
-  const currentChild = e.target;
-  const target = currentChild.nextSibling;
-  var value = parseInt(target.value);
-  target.value = (isNaN(value) || value <= 0) ? 0 : value - 1;
-}
-
-const incrementInput = e => {
-  const currentChild = e.target;
-  const target = currentChild.previousSibling;
-  var value = parseInt(target.value);
-  target.value = (isNaN(value)) ? 1 : value + 1;
-}
-
-
-
-const mobile_switch_button = element => {
-  var sibling = element.parentNode.firstChild;
-  while(sibling){
-    
-    if(sibling.nodeType === 1 && sibling.tagName === 'I'){
-      sibling.classList.toggle('hide');
-    }
-    
-    if(sibling.nodeType === 1 && sibling.tagName === 'DIV'){
-      if(sibling.innerText === "หน้า-หลัง")sibling.innerText = "หน้าเดียว",sibling.previousSibling.value = '1';
-      else sibling.innerText = "หน้า-หลัง",sibling.previousSibling.value = '2';
-    }
-    sibling = sibling.nextSibling;
-  }
-}
-
-const mobile_toggler = (e) => {
-  mobile_switch_button(e.target);
-}
-
-
-// Brown
-
-const updateBrownFunctionMobile = function() {
-  var target = document.getElementById('brown-total');
-  var origin = document.getElementById('brownPageOrigin-mol');
-  var copy = document.getElementById('brownCopy-mol');
-  var fraction = document.getElementById('brownType-mol').innerHTML==="หน้า-หลัง" ? 2:1;
-  var perPage = document.getElementById('brownPerCopy');
-  perPage.value = Math.ceil(origin.value/fraction);
-  target.value =Math.ceil(origin.value/fraction)*(copy.value);
-  
-  document.getElementById('brownPageOrigin').value = origin.value;
-  document.getElementById('brownCopy').value = copy.value;
-  document.getElementById('brownPagePerPaper').value = fraction;
-  document.getElementById('brown-perPage-mol').innerText = "จำนวนกระดาษที่ใช้ต่อชุด: " + parseInt(perPage.value);
-  document.getElementById('brown-target-mol').innerText = "จำนวนกระดาษที่ต้องใช้ทั้งหมด: " + parseInt(target.value);
-}
-
-const brownInput = document.querySelectorAll('.brown.auto-fill');
-brownInput.forEach(elem => {
-  elem.addEventListener('keyup',updateBrownFunctionMobile);
-})
-
-// White
-
-const updateWhiteFunctionMobile = function() {
-  var target = document.getElementById('white-total');
-  var origin = document.getElementById('whitePageOrigin-mol');
-  var copy = document.getElementById('whiteCopy-mol');
-  var fraction = document.getElementById('whiteType-mol').innerHTML==="หน้า-หลัง" ? 2:1;
-  var perPage = document.getElementById('whitePerCopy');
-  perPage.value = Math.ceil(origin.value/fraction);
-  target.value =Math.ceil(origin.value/fraction)*(copy.value);
-  
-
-  document.getElementById('whitePageOrigin').value = origin.value;
-  document.getElementById('whiteCopy').value = copy.value;
-  document.getElementById('whitePagePerPaper').value = fraction;
-  document.getElementById('white-perPage-mol').innerText = "จำนวนกระดาษที่ใช้ต่อชุด: " + parseInt(perPage.value);
-  document.getElementById('white-target-mol').innerText = "จำนวนกระดาษที่ต้องใช้ทั้งหมด: " + parseInt(target.value);
-}
-
-const whiteInput = document.querySelectorAll('.white.auto-fill');
-whiteInput.forEach(elem => {
-  elem.addEventListener('keyup',updateWhiteFunctionMobile);
-})
-
-// Color
-
-const updateColorFunctionMobile = function() {
-  var target = document.getElementById('color-total');
-  var origin = document.getElementById('colorPageOrigin-mol');
-  var copy = document.getElementById('colorCopy-mol');
-  var fraction = document.getElementById('colorType-mol').innerHTML==="หน้า-หลัง" ? 2:1;
-  var perPage = document.getElementById('colorPerCopy');
-  perPage.value = Math.ceil(origin.value/fraction);
-  target.value =Math.ceil(origin.value/fraction)*(copy.value);
-
-
-  document.getElementById('colorPageOrigin').value = origin.value;
-  document.getElementById('colorCopy').value = copy.value;
-  document.getElementById('colorPagePerPaper').value = fraction;
-  document.getElementById('color-perPage-mol').innerText = "จำนวนกระดาษที่ใช้ต่อชุด: " + parseInt(perPage.value);
-  document.getElementById('color-target-mol').innerText = "จำนวนกระดาษที่ต้องใช้ทั้งหมด: " + parseInt(target.value);
-}
-
-const colorInput = document.querySelectorAll('.color.auto-fill');
-colorInput.forEach(elem => {
-  elem.addEventListener('keyup',updateColorFunctionMobile);
-})
-
-
-const toggler = document.querySelectorAll('.grid-table .fa-chevron-circle-right , .grid-table .fa-chevron-circle-left');
-toggler.forEach(e => {
-  e.addEventListener('click',mobile_toggler);
-  e.addEventListener('click',updateBrownFunctionMobile);
-  e.addEventListener('click',updateWhiteFunctionMobile);
-  e.addEventListener('click',updateColorFunctionMobile);
-})
-const minusBtn = document.querySelectorAll('.fa-minus-circle');
-minusBtn.forEach(e => {
-  e.addEventListener('click',decrementInput);
-  e.addEventListener('click',updateBrownFunctionMobile);
-  e.addEventListener('click',updateWhiteFunctionMobile);
-  e.addEventListener('click',updateColorFunctionMobile);
-});
-
-const plusBtn = document.querySelectorAll('.fa-plus-circle');
-plusBtn.forEach(e => {
-  e.addEventListener('click',incrementInput);
-  e.addEventListener('click',updateBrownFunctionMobile);
-  e.addEventListener('click',updateWhiteFunctionMobile);
-  e.addEventListener('click',updateColorFunctionMobile);
-});

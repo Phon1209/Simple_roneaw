@@ -22,13 +22,16 @@
       <div class="menu">
         <div>
           <ul class="menu-list">
-            <li class="current"><a href="#">PRINT</a></li>
-            <li><a href="#">HISTORY</a></li>
-            <li><a href="#">HELP</a></li>
-            <li><a href="/logout">LOGOUT</a></li>
+            <li class="current"><a href="#">การสั่งพิมพ์</a></li>
+            <li><a href="#">ประวัติ</a></li>
+            <li><a href="#">ช่วยเหลือ</a></li>
+            <li><a href="/logout">ออกจากระบบ</a></li>
           </ul>
         </div>
       </div>
+    </section>
+    <section class="navbar">
+      
     </section>
     <form action="/" method="post" onsubmit="return formCheck()">
       @csrf
@@ -79,85 +82,15 @@
       </section>
       </div>
       <section id="table-form">
-        <div class="grid-table">
-          <div class="item bg-black">ชนิดกระดาษ</div>
-          <div class="item bg-pink">รายละเอียดการสั่ง</div>
-          <div class="item bg-brown">กระดาษน้ำตาล</div>
-          <div class="item">
-            <div class="content-center">
-              <label>จำนวนต้นฉบับ(หน้า)</label>
-              <i class="fas fa-minus-circle"></i><input id="brownPageOrigin-mol" class="brown auto-fill" type="number" name="brownPageOrigin"><i class="fas fa-plus-circle"></i>
-            </div>
-            <div class="content-center">
-              <label>จำนวนสำเนา(ชุด)</label>
-              <i class="fas fa-minus-circle"></i><input id="brownCopy-mol" class="brown auto-fill" type="number" name="brownCopy"><i class="fas fa-plus-circle"></i>
-            </div>
-            <div id="brown-toggler-mol">
-              <label>ลักษณะเอกสาร</label>
-              <i class="fas fa-chevron-circle-left hide"></i>
-              <input id="brownPagePerPaper-mol" type="hidden" name="brownPagePerPaper" value="2">
-              <div id="brownType-mol" class="toggle-btn">หน้า-หลัง</div>
-              <i class="fas fa-chevron-circle-right"></i>
-            </div>
-          </div>
-          <div class="item">
-            <p id="brown-perPage-mol">จำนวนกระดาษที่ใช้ต่อชุด: 0</p>
-            <p id="brown-target-mol">จำนวนกระดาษที่ต้องใช้ทั้งหมด: 0</p>
-          </div>
-          <div class="item bg-white">กระดาษขาว</div>
-          <div class="item">
-            <div class="content-center">
-              <label>จำนวนต้นฉบับ(หน้า)</label>
-              <i class="fas fa-minus-circle"></i><input id="whitePageOrigin-mol" class="white auto-fill" type="number" name="whitePageOrigin"><i class="fas fa-plus-circle"></i>
-            </div>
-            <div class="content-center">
-              <label>จำนวนสำเนา(ชุด)</label>
-              <i class="fas fa-minus-circle"></i><input id="whiteCopy-mol" class="white auto-fill" type="number" name="whiteCopy"><i class="fas fa-plus-circle"></i>
-            </div>
-            <div id="white-toggler-mol">
-              <label>ลักษณะเอกสาร</label>
-              <i class="fas fa-chevron-circle-left hide"></i>
-              <input id="whitePagePerPaper-mol" type="hidden" name="whitePagePerPaper" value="2">
-              <div id="whiteType-mol" class="toggle-btn">หน้า-หลัง</div>
-              <i class="fas fa-chevron-circle-right"></i>
-            </div>
-          </div>
-          <div class="item">
-            <p id="white-perPage-mol">จำนวนกระดาษที่ใช้ต่อชุด: 0</p>
-            <p id="white-target-mol">จำนวนกระดาษที่ต้องใช้ทั้งหมด: 0</p>
-          </div>
-          <div class="item bg-pink">กระดาษสี</div>
-          <div class="item">
-            <div class="content-center">
-              <label>จำนวนต้นฉบับ(หน้า)</label>
-              <i class="fas fa-minus-circle"></i><input id="colorPageOrigin-mol" class="color auto-fill" type="number" name="colorPageOrigin"><i class="fas fa-plus-circle"></i>
-            </div>
-            <div class="content-center">
-              <label>จำนวนสำเนา(ชุด)</label>
-              <i class="fas fa-minus-circle"></i><input id="colorCopy-mol" class="color auto-fill" type="number" name="colorCopy"><i class="fas fa-plus-circle"></i>
-            </div>
-            <div id="color-toggler-mol">
-              <label>ลักษณะเอกสาร</label>
-              <i class="fas fa-chevron-circle-left hide"></i>
-              <input id="colorPagePerPaper-mol" type="hidden" name="colorPagePerPaper" value="2">
-              <div id="colorType-mol" class="toggle-btn">หน้า-หลัง</div>
-              <i class="fas fa-chevron-circle-right"></i>
-            </div>
-          </div>
-          <div class="item">
-            <p id="color-perPage-mol">จำนวนกระดาษที่ใช้ต่อชุด: 0</p>
-            <p id="color-target-mol">จำนวนกระดาษที่ต้องใช้ทั้งหมด: 0</p>
-          </div>
-        </div>
         <table>
           <thead>
             <tr>
               <th>ชนิดกระดาษ</th>
-              <th>จำนวนต้นฉบับ(หน้า)</th>
-              <th>จำนวนสำเนา(ชุด)</th>
+              <th>จำนวนต้นฉบับ (หน้า)</th>
+              <th>จำนวนสำเนา (ชุด)</th>
               <th>ลักษณะเอกสาร</th>
               <th>จำนวนกระดาษที่ใช้ต่อชุด</th>
-              <th>Total</th>
+              <th>ทั้งหมด</th>
             </tr>
           </thead>
           <tbody>
@@ -165,7 +98,12 @@
               <th class="bg-brown">กระดาษน้ำตาล</th>
               <th class="content-center"><input id="brownPageOrigin" class="brown auto-fill" type="number" name="brownPageOrigin"></th>
               <th class="content-center"><input id="brownCopy" class="brown auto-fill" type="number" name="brownCopy"></th>
-              <th id="brown-toggler"><input id="brownPagePerPaper" type="hidden" name="brownPagePerPaper" value="2"><i class="fas fa-chevron-circle-left hide"></i><div id="brownType" class="toggle-btn">หน้า-หลัง</div><i class="fas fa-chevron-circle-right"></i></th>
+              <th id="brown-toggler">
+                <input id="brownPagePerPaper" type="hidden" name="brownPagePerPaper" value="2">
+                <i class="fas fa-chevron-circle-left hide"></i>
+                <div id="brownType" class="toggle-btn">หน้า-หลัง</div>
+                <i class="fas fa-chevron-circle-right"></i>
+              </th>
               <th><input type="number" id="brownPerCopy" disabled="disabled" value="0"></th>
               <th><input id="brown-total" type="number" name="brownTotal" disabled="disabled" value="0"></th>
             </tr>
