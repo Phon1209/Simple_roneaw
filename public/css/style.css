@@ -209,14 +209,14 @@ p {
 /* Sidebar Styling */
 .sidebar .menu {
   background: rgba(48,48,48,0.92);
-  width: 200px;
+  width: 400px;
   height: 100vh;
   overflow: hidden;
   position: fixed;
   transition: all 0.5s ease;
   padding-top: 50px;
   color: #fff;
-  transform: translate(-200px,0);
+  transform: translate(-100%,0);
 }
 
 .sidebar .menu ul.menu-list {
@@ -262,15 +262,6 @@ p {
   background: red;
   color: #fff;
   box-shadow: none;
-}
-/* Navbar Styling for Desktop */
-
-.sidebar {
-  display: none;
-}
-
-.navbar {
-  
 }
 
 /* Section: Login (Page: Login)*/

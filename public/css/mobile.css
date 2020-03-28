@@ -7,6 +7,10 @@
     z-index: 1;
   }
 
+  .sidebar .menu {
+    width: 200px;
+  }
+  
   header.heading {
     display: flex;
     text-align: center;
@@ -20,9 +24,6 @@
     z-index: 0;
   }
 
-  .navbar {
-    display: none;
-  }
   
   .heading h3 {
     padding-bottom: 0;
