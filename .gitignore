@@ -1,13 +1,1 @@
-*
-!public/
-!public/css/
-!public/css/*
-!public/js/
-!public/js/*
-!public/webfonts/
-!public/webfonts/*
-!resources/
-!resources/views/
-!resources/views/*
-!resources/views/*/*
-!.gitignore
+
