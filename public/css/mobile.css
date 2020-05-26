@@ -1,4 +1,5 @@
 @media (max-width: 1024px) {
+  html,
   body {
     font-size: 20px;
   }
@@ -10,7 +11,7 @@
   .sidebar .menu {
     width: 200px;
   }
-  
+
   header.heading {
     display: flex;
     text-align: center;
@@ -24,7 +25,6 @@
     z-index: 0;
   }
 
-  
   .heading h3 {
     padding-bottom: 0;
     margin: auto;
@@ -50,12 +50,13 @@
     min-width: 67vw;
   }
 
-
-  #org-slct, #work-slct {
+  #org-slct,
+  #work-slct {
     width: 80vw;
   }
 
-  #org-slct .inst, #work-slct .inst {
+  #org-slct .inst,
+  #work-slct .inst {
     width: 80vw;
   }
 
@@ -66,7 +67,7 @@
   #table-form table th {
     min-width: 10vw;
     font-weight: 500;
-    font-size: .45rem;
+    font-size: 0.45rem;
   }
 
   #table-form table tr th:nth-child(4) > i {
@@ -82,13 +83,82 @@
   }
 
   #table-form .toggle-btn {
-    font-size: .45rem;
+    font-size: 0.45rem;
   }
 
   #table-form th input[type="number"] {
-    font-size: .45rem;
+    font-size: 0.45rem;
   }
   #table-form input {
-    font-size: .45rem;
+    font-size: 0.45rem;
+  }
+
+  /* Modal Form */
+
+  .modal .form-grid .form-grid-body {
+    grid-template-columns: 1fr;
+  }
+
+  /* Admin */
+  .admin-container h2 {
+    width: 100vw;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 0;
+    background: #e4e4e4;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .admin-container .table-content {
+    margin-top: calc(50px + 1rem);
+  }
+}
+
+@media (max-width: 560px) {
+  html,
+  body {
+    font-size: 16px;
+  }
+
+  .modal .form-group {
+    flex-direction: column;
+  }
+
+  .modal .form-group label {
+    width: 100%;
+    text-align: center;
+    margin-right: 0;
+  }
+
+  .modal .form-group .form-title {
+    width: 100%;
+    margin-right: 0;
+    text-align: center;
+  }
+
+  .modal .form-group label {
+    text-align: left;
+  }
+
+  .modal .form-group input {
+    width: 100%;
+  }
+
+  .modal .form-multi .form-title {
+    text-align: left;
+  }
+
+  .modal .form-multi .form-multi-body {
+    width: 100%;
+  }
+
+  .modal .form-ext input.toggler + label {
+    width: 100%;
+    margin: 0;
+    margin-top: 0.2rem;
   }
 }

@@ -1,38 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" href="css/style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
     <link
       rel="stylesheet"
       href="css/mobile.css"
     />
-    <script src="https://kit.fontawesome.com/744c1f376a.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css?family=Athiti|Kanit|Mali&display=swap" rel="stylesheet">
     <title>Form</title>
   </head>
   <body>
-    <section class="sidebar">
-      <input type="checkbox" class="toggler"/>
-      <div class="hamburger">
-        <div></div>
-       </div>
-      <div class="menu">
-        <div>
-          <ul class="menu-list">
-            <li class="current"><a href="#">การสั่งพิมพ์</a></li>
-            <li><a href="#">ประวัติ</a></li>
-            <li><a href="#">ช่วยเหลือ</a></li>
-            <li><a href="/logout">ออกจากระบบ</a></li>
-          </ul>
-        </div>
-      </div>
-    </section>
-    <section class="navbar">
-      
-    </section>
+    @include('component/sidebar',['current'=>'การสั่งพิมพ์'])
     <form action="/" method="post" onsubmit="return formCheck()">
       @csrf
 
@@ -93,17 +75,12 @@
               <th>ทั้งหมด</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody id="paper-container">
             <tr>
               <th class="bg-brown">กระดาษน้ำตาล</th>
               <th class="content-center"><input id="brownPageOrigin" class="brown auto-fill" type="number" name="brownPageOrigin"></th>
               <th class="content-center"><input id="brownCopy" class="brown auto-fill" type="number" name="brownCopy"></th>
-              <th id="brown-toggler">
-                <input id="brownPagePerPaper" type="hidden" name="brownPagePerPaper" value="2">
-                <i class="fas fa-chevron-circle-left hide"></i>
-                <div id="brownType" class="toggle-btn">หน้า-หลัง</div>
-                <i class="fas fa-chevron-circle-right"></i>
-              </th>
+              <th id="brown-toggler"><input id="brownPagePerPaper" type="hidden" name="brownPagePerPaper" value="2"><i class="fas fa-chevron-circle-left hide"></i><div id="brownType" class="toggle-btn">หน้า-หลัง</div><i class="fas fa-chevron-circle-right"></i></th>
               <th><input type="number" id="brownPerCopy" disabled="disabled" value="0"></th>
               <th><input id="brown-total" type="number" name="brownTotal" disabled="disabled" value="0"></th>
             </tr>

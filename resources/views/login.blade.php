@@ -15,10 +15,10 @@
   </head>
   <body>
   <section class="sidebar">
-      <input type="checkbox" class="toggler"/>
-      <div class="hamburger">
-        <div></div>
-       </div>
+    <input type="checkbox" class="toggler"/>
+    <div class="hamburger">
+      <div></div>
+    </div>
       <div class="menu">
         <div>
           <ul class="menu-list">
