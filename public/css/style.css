@@ -96,12 +96,12 @@ i {
   border-radius: 10%;
 }
 
-.child-round > div:first-child {
+.child-round > *:first-child {
   border-top-left-radius: 4px;
   border-bottom-left-radius: 4px;
 }
 
-.child-round > div:last-child {
+.child-round > *:last-child {
   border-top-right-radius: 4px;
   border-bottom-right-radius: 4px;
 }
@@ -915,6 +915,7 @@ input[value="PRINT"] {
   background: transparent;
   border-radius: 0.4rem;
   border: 2px solid white;
+  cursor: pointer;
 }
 .table-heading .tab-control h4.checked {
   color: #ff7492;
@@ -1035,7 +1036,7 @@ input[value="PRINT"] {
   align-items: center;
 }
 
-#user-page-control > div {
+#user-page-control > * {
   background: white;
   border: var(--border-color) 1px solid;
   padding: 0.2rem 0.4rem;
@@ -1043,19 +1044,20 @@ input[value="PRINT"] {
   line-height: 1.5;
   cursor: pointer;
   color: #ff7492;
+  font-style: normal;
 }
 
-#user-page-control > div:hover {
+#user-page-control > *:hover {
   background-color: #eff3f6;
 }
 
-#user-page-control > div.current {
+#user-page-control > *.current {
   color: #333;
   background: var(--primary-color);
 }
 
-#user-page-control > div.disable,
-#user-page-control > div.disable {
+#user-page-control > *.disable,
+#user-page-control > *.disable:hover {
   color: #d1d5da;
   cursor: default;
   background: #fafbfc;
@@ -1098,6 +1100,7 @@ input[value="PRINT"] {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   border: none;
+  height: 100%;
 }
 #org-collection .paper-grid .paper-summary {
   grid-column: span 3;

@@ -376,23 +376,51 @@
           userPageControl.removeChild(userPageControl.firstChild);
         }
 
-        userPageControl.innerHTML += `<div class="p-1 ${page-1===0? "disable":""}" page="${Math.max(page-1,1)}">Previous</div>`
+
+        const paginationTemplate = (title,state,page) => {
+          if(state === "disable")return `<span class="disable p-1">${title}</span>`
+          else if(state === "current") return `<em class="current p-1">${title}</em>`
+          return `<a href="#user-collection" page="${page}" class="p-1">${title}</a>`
+        }
+
+        userPageControl.innerHTML += paginationTemplate("Previous",(page===1)? "disable":"",page-1);
         pageNumberShowed.forEach(pageNumber => {
           if(pageNumber - lastPageNumber === 1) {
-            userPageControl.innerHTML += `<div class="p-1${pageNumber===page? " current":""}" page="${pageNumber}">${pageNumber}</div>`
+            userPageControl.innerHTML += paginationTemplate(pageNumber,(pageNumber === page)? "current":"",pageNumber);
           }
           else if(pageNumber !== lastPageNumber) {
-            userPageControl.innerHTML += `<div class="p-1 disable">...</div>`
+            userPageControl.innerHTML += paginationTemplate("...","disable");
           }
           lastPageNumber = pageNumber;
         });
-        userPageControl.innerHTML += `<div class="p-1 ${page+1>totalPage? "disable":""}" page="${Math.min(page+1,totalPage)}">Next</div>`
+        userPageControl.innerHTML += paginationTemplate("Next",(page === totalPage)? "disable":"",page+1);
       }
 
       static updateOrgList() {
         // usage: Create Node by template provide below
         //         and use insertBefore to insert that node into collection
         // TODO: Implement
+
+        //   `<div class="orgData">กลุ่มสาระการเรียนรู้สังคมศึกษา ศาสนา และวัฒนธรรม</div>
+        // <div class="orgData paper-grid">
+        //   <div class="bg-brown">1</div>
+        //   <div class="bg-white">0</div>
+        //   <div class="bg-pink">6</div>
+        //   <div class="paper-summary">รวม: 7</div>
+        // </div>
+        // <div class="orgData paper-grid">
+        //   <div class="bg-brown">2</div>
+        //   <div class="bg-white">10</div>
+        //   <div class="bg-pink">100</div>
+        //   <div class="paper-summary">รวม: 112</div>
+        // </div>
+        // <div class="orgData paper-grid">
+        //   <div class="bg-brown">7</div>
+        //   <div class="bg-white">7</div>
+        //   <div class="bg-pink">7</div>
+        //   <div class="paper-summary">รวม: 21</div>
+        // </div>
+        // <div class="orgData">140</div>`
       }
     }
     function leadZero(num) {
