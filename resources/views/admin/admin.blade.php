@@ -16,10 +16,6 @@
   <body>
     @include('component/sidebar',['current'=>'โหมดผู้ดูแลระบบ'])
     <div class="modal-collection">
-      <div class="modal" id="resultPopup">
-        <div class="modal-dismiss">&times;</div>
-        <div id="result"></div>
-      </div>
       <div class="modal" id="addUserPopup">
         <div class="modal-dismiss">&times;</div>
         <div>
@@ -180,44 +176,27 @@
       <h2>Welcome Admin</h2>
       <div class="table-content">
         <header class="table-heading">
-          <h4>User List</h4>
+          <div class="tab-control">
+            <h4 class="checked tab" aria-label="User">User List</h4>
+            <h4 class="tab" aria-label="Organization">Organization List</h4>
+          </div>
           <div class="btn-control">
-            <input type="button" id="addUserBtn" class="btn" value="Add User">
-            <input type="button" value="Filter" class="btn" id="filterBtn">
+            <div id="addUserBtn" class="btn"><i class="fas fa-user-plus"></i> Add User</div>
+            <div id="filterBtn" class="btn"><i class="fas fa-filter"></i> Filter</div>
           </div>
         </header>
-        <!-- <table id="userTable">
-          <thead>
-            <tr>
-              <th rowspan="2">id</th>
-              <th rowspan="2">Username</th>
-              <th rowspan="2">Rank</th>
-              <th rowspan="2">Display Name</th>
-              <th rowspan="2">Organization List</th>
-              <th colspan="3">Paper Use</th>
-              <th rowspan="2">Edit User</th>
-              <th rowspan="2">Delete User</th>
-              <th rowspan="2">Paper Report</th>
-            </tr>
-            <tr>
-              <th>Brown</th>
-              <th>White</th>
-              <th>Color</th>
-            </tr>
-          </thead>
-          <tbody id="user-collection">
-          </tbody>
-        </table> -->
-        <div id="user-collection">
-          <div class="title">General</div>
-          <div class="title">Organization List</div>
-          <div class="title">Paper</div>
-          <div class="title">Panel</div>
-        </div>
+        <section>
+          <div id="user-collection" class="py-2">
+            <div class="title">General</div>
+            <div class="title">Organization List</div>
+            <div class="title">Paper</div>
+            <div class="title">Panel</div>
+          </div>
+          <div id="user-page-control" class="py-2 child-round"></div>
+        </section>
       </div>
     </div>
     <script src="js/admin/ui.js"></script>
-    <!-- <script src="js/admin/app.js"></script> -->
     <script src="js/admin/api.js"></script>
   </body>
   <script type="text/javascript">
@@ -226,8 +205,6 @@
     var userDataList;
     var organizationList={!!json_encode($organizationList)!!};
     var rankList={!!json_encode($rankList)!!};
-
-    var result=document.getElementById("result");
 
     var addUserBtn=document.getElementById("addUserBtn");
     var modalAddUser=document.getElementById("modal-addUser");
@@ -252,7 +229,9 @@
 
     const closeScreenNode = document.querySelectorAll(".modal-dismiss");
     closeScreenNode.forEach(node => {
-      node.onclick = closePopup;
+      node.addEventListener("click",e => {
+        UI.closeModal(e.target.parentElement.id);
+      });
     });
 
     class userManager {
@@ -262,12 +241,12 @@
           "_token={{csrf_token()}}&usr=" + usr,
           function (xhr) {
             if (xhr.responseText == "true") {
-              UI.showAlert(`Complete Delete User ${usr}`,"alert alert-success");
+              UI.showAlert(`ลบผู้ใช้ ${usr} สำเร็จแล้ว`,"alert alert-success");
               userManager.updateUserCollection();
             } else if (xhr.responseText == "false") {
-              UI.showAlert(`Delete User ${usr} Failed`);
+              UI.showAlert(`ลบผู้ใช้ ${usr} ไม่สำเร็จ`);
             }
-            UI.closePopup("confirmDeleteUserPopup");
+            UI.closeModal("confirmDeleteUserPopup");
           }
         );
       }
@@ -291,7 +270,7 @@
           document.querySelector(`.editUserForm_organization[value="${organizeIndex}"]`).checked = true;
         });
 
-        showPopup("editUserPopup");
+        UI.showModal("editUserPopup");
         userManager.updateUserCollection();
       }
 
@@ -303,15 +282,12 @@
           userDataList=JSON.parse(xhr.responseText);
         });
         UI.resetForm("filterForm");
-        userManager.updateUserListTable();
+        userManager.updateUserList();
       }
 
-      static updateUserListTable()
+      static filteredUserList;
+      static updateUserList()
       {
-        const userCollection = document.getElementById("user-collection");
-        document.querySelectorAll('#user-collection .userData').forEach(elem => {
-          elem.remove();
-        })
         const Filter = {
           user: document.getElementById("usrFilter").value,
           rank: [],
@@ -324,96 +300,106 @@
         document.querySelectorAll(`input[name="organizationFilter"]`).forEach(elem => {
           if(elem.checked) Filter.organization.push(+elem.value);
         })
-        
-        userDataList.forEach(user => { 
-          if(user.Username.includes(Filter.user) && 
-            (Filter.rank.includes(user.Rank) || Filter.rank.length === 0) &&
-            (user.DisplayName.includes(Filter.displayName)) &&
-            (Filter.organization.some(org => user.OrganizationIDList.includes(org)) || Filter.organization.length === 0)){
-            
-            let OrgList = "";
-            user['OrganizationIDList'].forEach(function(value,key){
-              OrgList += `${key+1}) ${organizationList[value]}<br>`;
-            });
 
-            // const userData = document.createElement("tr");
-
-            // let outputUserData = `
-            //   <td>${leadZero(user['id'])}</td>
-            //   <td>${user['Username']}</td>
-            //   <td>${rankList[user['Rank']]}</td>
-            //   <td>${user['DisplayName']}</td>
-            //   <td>${OrgList}</td>
-            //   <td>${user['BrownPaper']}</td>
-            //   <td>${user['WhitePaper']}</td>
-            //   <td>${user['ColorPaper']}</td>
-            //   <td><i username="${user['Username']}" class="fas fa-user-edit fa-2x edit"></i></td>
-            //   <td><i username="${user['Username']}" class="fas fa-trash-alt fa-2x delete"></i></td>
-            //   <td><i username="${user['Username']}" class="fas fa-clipboard-list fa-2x print"></i></td>
-            // `;
-
-            // userData.innerHTML = outputUserData;
-            // userCollection.appendChild(userData);
-
-            let output = `
-            <div class="userData">${leadZero(user['id'])}</div>
-            <div class="userData">${OrgList}</div>
-            <div class="userData">
-              <div class="bg-brown w-100">${user['BrownPaper']}</div>
-              <div class="bg-white w-100">${user['WhitePaper']}</div>
-              <div class="bg-pink w-100">${user['ColorPaper']}</div>
-            </div>
-            <div class="userData" username="${user['Username']}">
-              <i class="fas fa-user-edit edit"></i>
-              <i class="fas fa-clipboard-list print"></i>
-              <i class="fas fa-trash-alt delete"></i>
-            </div>
-            <div class="userData">${user['Username']}</div>
-            <div class="userData">${rankList[user['Rank']]}</div>
-            <div class="userData">${user['DisplayName']}</div>
-            `
-
-            userCollection.innerHTML += output;
-          }
+        this.filteredUserList = userDataList.filter(function(user) {
+          return user.Username.includes(Filter.user) && 
+                (Filter.rank.includes(user.Rank) || Filter.rank.length === 0) &&
+                (user.DisplayName.includes(Filter.displayName)) &&
+                (Filter.organization.some(org => user.OrganizationIDList.includes(org)) || Filter.organization.length === 0);
         });
+
+        this.updateUserTable();
+        this.updateUserControl();
+      }
+
+      static userTableData = {
+        page: 1,
+        limit: 10
+      };
+
+      static updateUserTable() {
+        const {page,limit} = this.userTableData;
+        const userCollection = document.getElementById("user-collection");
+        document.querySelectorAll('#user-collection .userData').forEach(elem => {
+          elem.remove();
+        });
+
+        for(let i = (page - 1)*limit; i<(page*limit) ;i++) {
+          if(i >= this.filteredUserList.length)break;
+
+          const user = this.filteredUserList[i];
+          let OrgList = "";
+          user['OrganizationIDList'].forEach(function(value,key){
+            OrgList += `${key+1}) ${organizationList[value]}<br>`;
+          });
+
+          let output = `
+          <div class="userData">${leadZero(user['id'])}</div>
+          <div class="userData">${OrgList}</div>
+          <div class="userData">
+            <div class="bg-brown w-100">${user['BrownPaper']}</div>
+            <div class="bg-white w-100">${user['WhitePaper']}</div>
+            <div class="bg-pink w-100">${user['ColorPaper']}</div>
+          </div>
+          <div class="userData" username="${user['Username']}">
+            <i class="fas fa-user-edit edit"></i>
+            <i class="fas fa-clipboard-list print"></i>
+            <i class="fas fa-trash-alt delete"></i>
+          </div>
+          <div class="userData">${user['Username']}</div>
+          <div class="userData">${rankList[user['Rank']]}</div>
+          <div class="userData">${user['DisplayName']}</div>
+          `
+
+          userCollection.innerHTML += output;
+        }
+      }
+      
+      static updateUserControl() {
+        const {page,limit} = this.userTableData;
+        const totalPage = Math.ceil(this.filteredUserList.length / limit);
+        const pageNumberShowed = new Array();
+        const userPageControl = document.querySelector("#user-page-control");
+
+        for(let i = 1;i <= 2 ; i++)
+          if(i<=totalPage && i>=1)pageNumberShowed.push(i);
+        for(let i = page - 2;i <= page+2; i++)
+          if(i<=totalPage && i>=1)pageNumberShowed.push(i);
+        for(let i = totalPage - 1;i <= totalPage; i++)
+          if(i<=totalPage && i>=1)pageNumberShowed.push(i);
+
+        pageNumberShowed.sort();
+
+        let lastPageNumber = 0;
+        
+        while(userPageControl.firstChild){
+          userPageControl.removeChild(userPageControl.firstChild);
+        }
+
+        userPageControl.innerHTML += `<div class="p-1 ${page-1===0? "disable":""}" page="${Math.max(page-1,1)}">Previous</div>`
+        pageNumberShowed.forEach(pageNumber => {
+          if(pageNumber - lastPageNumber === 1) {
+            userPageControl.innerHTML += `<div class="p-1${pageNumber===page? " current":""}" page="${pageNumber}">${pageNumber}</div>`
+          }
+          else if(pageNumber !== lastPageNumber) {
+            userPageControl.innerHTML += `<div class="p-1 disable">...</div>`
+          }
+          lastPageNumber = pageNumber;
+        });
+        userPageControl.innerHTML += `<div class="p-1 ${page+1>totalPage? "disable":""}" page="${Math.min(page+1,totalPage)}">Next</div>`
       }
     }
     function leadZero(num) {
       const s = "00000" + (+num);
       return s.substr(s.length-5);
     }
-    function popupPrepare()
-    {
-      document.querySelector(".modal-collection").style.display="block";
-      var transparentscreencontentclasslist=document.getElementsByClassName("modal");
-
-      for(var i=0;i<transparentscreencontentclasslist.length;i++)
-      {
-        transparentscreencontentclasslist[i].style.display="none";
-      }
-    }
-
-    function showPopup(id)
-    {
-      popupPrepare();
-      document.getElementById(id).style.display="flex";
-    }
-
-    function closePopup()
-    {
-      document.querySelector(".modal-collection").style.display="none";
-    }
 
     function confirmDeleteUser(usr)
     {
       confirmDeleteUserName.innerHTML=usr;
       confirmDeleteUser_Confirm.setAttribute("onclick","userManager.deleteUser(\""+usr+"\")");
-      showPopup("confirmDeleteUserPopup");
+      UI.showModal("confirmDeleteUserPopup");
     }
-
-    addUserBtn.addEventListener("click",() => {
-      showPopup("addUserPopup");
-    });
 
     modalAddUser.onclick=function()
     {
@@ -422,15 +408,15 @@
       function(xhr){
         if (xhr.responseText === "true")
         {
-          UI.showAlert(`Complete Add User ${addUserForm_usr.value}`,'alert alert-success')
+          UI.showAlert(`เพิ่มผู้ใช้ ${addUserForm_usr.value} สำเร็จแล้ว!`,'alert alert-success')
+          UI.resetForm("addUserForm");
           userManager.updateUserCollection();
         }
         else if (xhr.responseText === "false")
         {
-          UI.showAlert(`Add User Failed`,'alert alert-danger');
+          UI.showAlert(`เพิ่มผู้ใช้ไม่สำเร็จ`,'alert alert-danger');
         }
-        UI.resetForm("addUserForm");
-        UI.closePopup("addUserPopup");
+        UI.closeModal("addUserPopup");
       });
     };
 
@@ -442,15 +428,15 @@
       function(xhr){
         if (xhr.responseText=="true")
         {
-          UI.showAlert(`Complete Edit User ${editUserForm_usr.value}`,"alert alert-success")
+          UI.showAlert(`แก้ไขผู้ใช้ ${editUserForm_usr.value} สำเร็จแล้ว`,"alert alert-success")
           userManager.updateUserCollection();
         }
         else if (xhr.responseText=="false")
         {
-          UI.showAlert(`Edit User ${editUserForm_usr.value} Failed...`,"alert alert-danger");
+          UI.showAlert(`แก้ไขผู้ใช้ ${editUserForm_usr.value} ไม่สำเร็จ..`,"alert alert-danger");
         }
         UI.resetForm("editUserForm");
-        UI.closePopup("editUserPopup");
+        UI.closeModal("editUserPopup");
       });
       editUserForm_usr.disabled=true;
     };
@@ -461,26 +447,10 @@
       editUserForm_pwd.disabled=!editUserFormAllowChangePassword.checked;
     };
 
-    filterBtn.addEventListener('click',() => {
-      showPopup("filterPopup");
-    });
-
     btnFilterPopupClose.onclick=function(){
-      userManager.updateUserListTable();
-      closePopup();
+      userManager.updateUserList();
     };
-
-    document.body.addEventListener("click",(e) => {
-      if(e.target.nodeName !== "I")return;
-      if(e.target.classList.contains("edit")){
-        userManager.editUser(e.target.parentNode.getAttribute("username"));
-      }
-      if(e.target.classList.contains("delete")) {
-        confirmDeleteUser(e.target.parentNode.getAttribute("username"));
-      }
-    })
-
-    userManager.updateUserCollection();
+    
   </script>
   <script src="js/admin/app.js"></script>
 </html>
