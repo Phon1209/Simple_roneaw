@@ -103,7 +103,7 @@ class UI {
       <div class="title text-center">เอกสารทั่วไป</div>
       <div class="title text-center">ข้อสอบ</div>
       <div class="title text-center">รวม</div>
-      <div class="orgData">กลุ่มสาระการเรียนรู้วิทยาศาสตร์และเทคโนโลยี</div>
+      <div class="orgData">กลุ่มสาระการเรียนรู้สังคมศึกษา ศาสนา และวัฒนธรรม</div>
       <div class="orgData paper-grid">
         <div class="bg-brown">1</div>
         <div class="bg-white">0</div>
@@ -123,6 +123,27 @@ class UI {
         <div class="paper-summary">รวม: 21</div>
       </div>
       <div class="orgData">140</div>
+
+      <div class="orgSummary">รวมทั้งหมด</div>
+      <div class="orgSummary paper-grid">
+        <div class="bg-brown">10000</div>
+        <div class="bg-white">10000</div>
+        <div class="bg-pink">10000</div>
+        <div class="paper-summary">รวม: 10000999</div>
+      </div>
+      <div class="orgSummary paper-grid">
+        <div class="bg-brown">10000</div>
+        <div class="bg-white">10000</div>
+        <div class="bg-pink">10000</div>
+        <div class="paper-summary">รวม: 10000999</div>
+      </div>
+      <div class="orgSummary paper-grid">
+        <div class="bg-brown">10000</div>
+        <div class="bg-white">10000</div>
+        <div class="bg-pink">10000</div>
+        <div class="paper-summary">รวม: 10000999</div>
+      </div>
+      <div class="orgSummary">10140</div>
     </div>
     `;
 

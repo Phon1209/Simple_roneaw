@@ -388,6 +388,12 @@
         });
         userPageControl.innerHTML += `<div class="p-1 ${page+1>totalPage? "disable":""}" page="${Math.min(page+1,totalPage)}">Next</div>`
       }
+
+      static updateOrgList() {
+        // usage: Create Node by template provide below
+        //         and use insertBefore to insert that node into collection
+        // TODO: Implement
+      }
     }
     function leadZero(num) {
       const s = "00000" + (+num);

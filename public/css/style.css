@@ -256,6 +256,7 @@ i {
 /* Sidebar Utilities for Mobile*/
 
 .sidebar {
+  z-index: 100;
   position: fixed;
   top: 0;
   left: 0;
@@ -1071,12 +1072,13 @@ input[value="PRINT"] {
 
 #org-collection {
   display: grid;
-  grid-template-columns: 4fr repeat(3, 2fr) 1fr;
+  grid-template-columns: 5fr repeat(3, 3fr) 1fr;
 }
 
 #org-collection * {
   display: flex;
   align-items: center;
+  align-content: center;
   justify-content: center;
   border: 1px solid rgba(0, 0, 0, 0.3);
   background: #f4f4f4;
@@ -1099,4 +1101,11 @@ input[value="PRINT"] {
 }
 #org-collection .paper-grid .paper-summary {
   grid-column: span 3;
+}
+#org-collection .orgSummary,
+#org-collection .orgSummary * {
+  background: #fef4e2;
+}
+#org-collection .orgSummary > div {
+  font-size: 0.7rem;
 }
