@@ -86,7 +86,7 @@ class UI {
         const targetPage = e.target.getAttribute("page");
         if (+targetPage === userManager.userTableData.page) return;
         if (targetPage === "0") return;
-        userManager.pageRequest(targetPage);
+        userManager.pageRequest(+targetPage);
       });
 
     document
