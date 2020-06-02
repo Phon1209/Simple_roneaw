@@ -93,7 +93,7 @@ i {
 }
 
 .round {
-  border-radius: 10%;
+  border-radius: 5px;
 }
 
 .child-round > *:first-child {
@@ -163,6 +163,9 @@ i {
   position: fixed;
   top: 1rem;
   right: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 }
 
 .alert {
@@ -173,6 +176,7 @@ i {
   color: white;
   transform: translateX(200%);
   animation: drop 5s ease-in-out;
+  /* animation: drop 10000s ease-in-out; */
 }
 .alert-success {
   color: var(--success-color);
@@ -800,9 +804,6 @@ input[value="PRINT"] {
   font-weight: bolder;
 }
 
-/* .modal .form-multi {
-} */
-
 .modal .form-multi .form-title {
   width: 20%;
   margin-right: 10px;
@@ -1062,15 +1063,27 @@ input[value="PRINT"] {
   cursor: default;
   background: #fafbfc;
 }
-/* #user-page-control > div:first-child,
-#user-page-control > div:last-child {
-  background: transparent;
-  color: rgba(48, 48, 48, 0.8);
-  border: none;
-  padding: 0.2rem 0.5rem;
-  font-size: 1.2rem;
-  cursor: initial;
-} */
+
+#user-page-control > *.warp {
+  position: relative;
+}
+
+#user-page-control > *.warp .warp-content {
+  display: none;
+  opacity: 0;
+  position: absolute;
+  background: white;
+  top: 0;
+  left: 0;
+  transform: translateY(-100%);
+}
+
+#user-page-control > *.warp:hover .warp-content {
+  display: block;
+  opacity: 1;
+}
+
+/* Admin Page / Section: Organization */
 
 #org-collection {
   display: grid;
@@ -1090,13 +1103,18 @@ input[value="PRINT"] {
   font-size: 0.9rem;
   background: var(--primary-color);
   border: 1px solid rgba(0, 0, 0, 0.3);
+  position: sticky;
+  top: 0;
+  left: 0;
 }
 
 #org-collection .orgData {
   font-size: 0.7rem;
+  padding: 0 0.3rem;
 }
 
 #org-collection .paper-grid {
+  padding: 0;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   border: none;
@@ -1105,9 +1123,17 @@ input[value="PRINT"] {
 #org-collection .paper-grid .paper-summary {
   grid-column: span 3;
 }
+
+#org-collection .orgSummary {
+  padding: 0 0.3rem;
+}
 #org-collection .orgSummary,
 #org-collection .orgSummary * {
   background: #fef4e2;
+  font-size: 0.9rem;
+}
+#org-collection .orgSummary.paper-grid {
+  padding: 0;
 }
 #org-collection .orgSummary > div {
   font-size: 0.7rem;

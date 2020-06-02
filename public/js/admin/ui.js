@@ -33,6 +33,7 @@ class UI {
     this.alertCollection.appendChild(alert);
 
     setTimeout(this.removeAlert, 5000);
+    // setTimeout(this.removeAlert, 10000000);
   }
 
   static removeAlert() {
@@ -85,9 +86,19 @@ class UI {
         const targetPage = e.target.getAttribute("page");
         if (+targetPage === userManager.userTableData.page) return;
         if (targetPage === "0") return;
-        userManager.userTableData.page = +targetPage;
-        userManager.updateUserTable();
-        userManager.updateUserControl();
+        userManager.pageRequest(targetPage);
+      });
+
+    document
+      .querySelector("#user-page-control")
+      .addEventListener("keydown", (e) => {
+        if (
+          e.target.parentNode.classList.contains("warp-content") &&
+          e.key === "Enter"
+        ) {
+          const targetPage = +e.target.value;
+          userManager.pageRequest(targetPage);
+        }
       });
   }
 
@@ -127,24 +138,24 @@ class UI {
 
       <div class="orgSummary">รวมทั้งหมด</div>
       <div class="orgSummary paper-grid">
-        <div class="bg-brown">10000</div>
-        <div class="bg-white">10000</div>
-        <div class="bg-pink">10000</div>
-        <div class="paper-summary">รวม: 10000999</div>
+        <div class="bg-brown">333333</div>
+        <div class="bg-white">333333</div>
+        <div class="bg-pink">333333</div>
+        <div class="paper-summary">รวม: 999999</div>
       </div>
       <div class="orgSummary paper-grid">
-        <div class="bg-brown">10000</div>
-        <div class="bg-white">10000</div>
-        <div class="bg-pink">10000</div>
-        <div class="paper-summary">รวม: 10000999</div>
+        <div class="bg-brown">333333</div>
+        <div class="bg-white">333333</div>
+        <div class="bg-pink">333333</div>
+        <div class="paper-summary">รวม: 999999</div>
       </div>
       <div class="orgSummary paper-grid">
-        <div class="bg-brown">10000</div>
-        <div class="bg-white">10000</div>
-        <div class="bg-pink">10000</div>
-        <div class="paper-summary">รวม: 10000999</div>
+        <div class="bg-brown">333333</div>
+        <div class="bg-white">333333</div>
+        <div class="bg-pink">333333</div>
+        <div class="paper-summary">รวม: 999999</div>
       </div>
-      <div class="orgSummary">10140</div>
+      <div class="orgSummary">2999907</div>
     </div>
     `;
 

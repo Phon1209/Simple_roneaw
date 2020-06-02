@@ -308,14 +308,29 @@
                 (Filter.organization.some(org => user.OrganizationIDList.includes(org)) || Filter.organization.length === 0);
         });
 
+        this.userTableData.totalPage = Math.ceil(this.filteredUserList.length / this.userTableData.limit);
         this.updateUserTable();
         this.updateUserControl();
       }
 
       static userTableData = {
         page: 1,
-        limit: 10
+        // limit: 1,
+        limit: 10,
+        totalPage: 0,
       };
+
+      static pageRequest(page) {
+        if(page <= this.userTableData.totalPage && page >= 1) 
+        {
+          this.userTableData.page = page;
+          this.updateUserTable();
+          this.updateUserControl();
+        }
+        else {
+          UI.showAlert(`ไม่พบหน้า ${page}`,"alert alert-warning");
+        }
+      }
 
       static updateUserTable() {
         const {page,limit} = this.userTableData;
@@ -356,8 +371,7 @@
       }
       
       static updateUserControl() {
-        const {page,limit} = this.userTableData;
-        const totalPage = Math.ceil(this.filteredUserList.length / limit);
+        const {page,limit,totalPage} = this.userTableData;
         const pageNumberShowed = new Array();
         const userPageControl = document.querySelector("#user-page-control");
 
@@ -380,6 +394,14 @@
         const paginationTemplate = (title,state,page) => {
           if(state === "disable")return `<span class="disable p-1">${title}</span>`
           else if(state === "current") return `<em class="current p-1">${title}</em>`
+          else if(state === "warp") return `
+            <span class="warp">
+              ${title}
+              <div class="warp-content p-1 round">
+                Page: <input type="number" class="round"/>
+              </div>
+            </span>
+          `
           return `<a href="#user-collection" page="${page}" class="p-1">${title}</a>`
         }
 
@@ -389,7 +411,7 @@
             userPageControl.innerHTML += paginationTemplate(pageNumber,(pageNumber === page)? "current":"",pageNumber);
           }
           else if(pageNumber !== lastPageNumber) {
-            userPageControl.innerHTML += paginationTemplate("...","disable");
+            userPageControl.innerHTML += paginationTemplate("...","warp");
           }
           lastPageNumber = pageNumber;
         });

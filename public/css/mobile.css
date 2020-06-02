@@ -1,3 +1,13 @@
+@media (max-width: 1200px) {
+  #org-collection .paper-grid {
+    grid-template-columns: 1fr;
+  }
+
+  #org-collection .paper-grid .paper-summary {
+    grid-column: span 1;
+  }
+}
+
 @media (max-width: 1024px) {
   html,
   body {
