@@ -107,10 +107,10 @@ function radioChecked(name) {
 }
 
 function validateInput() {
-  const sum = 0;
+  let sum = 0;
   const invalidData = false;
   const unNullInput = document.getElementsByClassName("auto-fill");
-  for (const iter = 0; iter < unNullInput.length; iter++) {
+  for (let iter = 0; iter < unNullInput.length; iter++) {
     if (unNullInput[iter].value == 0) unNullInput[iter].value = 0;
     if (unNullInput[iter].value < 0) invalidData = true;
     sum += +unNullInput[iter].value;
@@ -120,7 +120,7 @@ function validateInput() {
 
 function removeLeadingZero() {
   const allInput = document.querySelectorAll("#table-form th > input");
-  for (const iter = 0; iter < allInput.length; iter++) {
+  for (let iter = 0; iter < allInput.length; iter++) {
     allInput[iter].value = +allInput[iter].value;
   }
 }
@@ -170,6 +170,6 @@ function formCheck() {
 function openPDF() {
   window.open("/Report");
   const elementList = document.getElementsByClassName("pdf-layout");
-  for (const i = 0; i < elementList.length; i++)
+  for (let i = 0; i < elementList.length; i++)
     elementList[i].parentNode.removeChild(elementList[i]);
 }

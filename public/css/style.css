@@ -16,6 +16,7 @@
   --danger-color: #dc3545;
   --warning-color: #ffc107;
   --success-color: #19925b;
+  --border-color: rgba(0, 0, 0, 0.3);
 }
 
 ::-webkit-scrollbar {
@@ -53,6 +54,13 @@ p {
   padding: 1rem;
 }
 
+input {
+  border: rgb(224, 202, 194) 2px solid;
+}
+
+i {
+  cursor: pointer;
+}
 /* Utilities */
 
 .container {
@@ -61,18 +69,45 @@ p {
   overflow: auto;
 }
 
-.pd-1 {
+.py-1 {
   padding: 0.3rem 0;
 }
-.pd-2 {
+.py-2 {
   padding: 0.5rem 0;
 }
-.pd-3 {
+.py-3 {
   padding: 0.7rem 0;
+}
+.p-1 {
+  padding: 0.3rem;
+}
+.p-2 {
+  padding: 0.5rem;
+}
+.p-3 {
+  padding: 0.7rem;
 }
 
 .cap-1100 {
   min-width: 1100px;
+}
+
+.round {
+  border-radius: 5px;
+}
+
+.child-round > *:first-child {
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.child-round > *:last-child {
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+.text-center {
+  text-align: center;
 }
 
 .btn {
@@ -98,15 +133,12 @@ p {
 .bg-brown {
   background: rgb(224, 202, 194) !important;
 }
-
 .bg-white {
   background: white !important;
 }
-
 .bg-pink {
   background: var(--light-primary-color) !important;
 }
-
 .bg-success {
   background: var(--success-color) !important;
 }
@@ -116,6 +148,7 @@ p {
 .bg-warning {
   background: var(--warning-color) !important;
 }
+
 .text-success {
   color: var(--success-color) !important;
 }
@@ -130,6 +163,9 @@ p {
   position: fixed;
   top: 1rem;
   right: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 }
 
 .alert {
@@ -140,6 +176,7 @@ p {
   color: white;
   transform: translateX(200%);
   animation: drop 5s ease-in-out;
+  /* animation: drop 10000s ease-in-out; */
 }
 .alert-success {
   color: var(--success-color);
@@ -223,6 +260,7 @@ p {
 /* Sidebar Utilities for Mobile*/
 
 .sidebar {
+  z-index: 100;
   position: fixed;
   top: 0;
   left: 0;
@@ -658,7 +696,7 @@ input[value="PRINT"] {
 
 /* Modal */
 .modal-collection {
-  display: block;
+  display: none;
   position: fixed;
   z-index: 1;
   left: 0;
@@ -670,7 +708,7 @@ input[value="PRINT"] {
 }
 
 .modal {
-  display: flex;
+  display: none;
   margin: 100px auto;
   width: 75%;
   padding: 1.25rem;
@@ -766,9 +804,6 @@ input[value="PRINT"] {
   font-weight: bolder;
 }
 
-/* .modal .form-multi {
-} */
-
 .modal .form-multi .form-title {
   width: 20%;
   margin-right: 10px;
@@ -859,25 +894,60 @@ input[value="PRINT"] {
   height: 100%;
 }
 
-/* Admin Page */
+/* Page: Admin Page */
 
 .table-content {
   margin-bottom: 1rem;
 }
-
 .table-heading {
   display: flex;
   justify-content: space-between;
   margin-bottom: 0.3rem;
 }
+.table-heading .tab-control {
+  display: flex;
+  font-size: 0.6rem;
+}
+.table-heading .tab-control h4 {
+  padding: 0rem 0.5rem;
+  margin-right: 0.2rem;
+  position: relative;
+  top: 0.3rem;
+  background: transparent;
+  border-radius: 0.4rem;
+  border: 2px solid white;
+  cursor: pointer;
+}
+.table-heading .tab-control h4.checked {
+  color: #ff7492;
+  background-color: white;
+}
+.table-heading .btn-control {
+  display: flex;
+}
 .table-heading .btn-control .btn {
-  min-width: 120px;
+  font-family: Arial, Helvetica, sans-serif;
+  min-width: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 0.3rem;
+  border: 1px solid white;
+}
+.table-heading .btn-control .btn i {
+  margin-right: 0.3rem;
 }
 .table-heading .btn-control #addUserBtn {
-  background: #3bc386;
+  background: #75d5aa;
 }
 .table-heading .btn-control #addUserBtn:hover {
-  background: #75d5aa;
+  background: #8cf1c4;
+}
+.table-heading .btn-control #filterBtn {
+  background: #ffb31a;
+}
+.table-heading .btn-control #filterBtn:hover {
+  background: #ffcc66;
 }
 
 #user-collection {
@@ -888,6 +958,7 @@ input[value="PRINT"] {
 
 #user-collection .title {
   background: var(--primary-color);
+  font-size: 0.9rem;
   border: 1px solid rgba(0, 0, 0, 0.3);
 }
 
@@ -937,6 +1008,7 @@ input[value="PRINT"] {
   flex-direction: column;
   align-items: center;
   justify-content: stretch;
+  height: 100%;
 }
 
 #user-collection .userData:nth-child(7n + 7) > div,
@@ -949,6 +1021,7 @@ input[value="PRINT"] {
 
 #user-collection i {
   font-size: 1rem;
+  cursor: pointer;
 }
 
 #user-collection .edit {
@@ -956,4 +1029,112 @@ input[value="PRINT"] {
 
 #user-collection .delete {
   color: var(--danger-color);
+}
+
+#user-page-control {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#user-page-control > * {
+  background: white;
+  border: var(--border-color) 1px solid;
+  padding: 0.2rem 0.4rem;
+  font-size: 0.6rem;
+  line-height: 1.5;
+  cursor: pointer;
+  color: #ff7492;
+  font-style: normal;
+}
+
+#user-page-control > *:hover {
+  background-color: #eff3f6;
+}
+
+#user-page-control > *.current {
+  color: #333;
+  background: var(--primary-color);
+}
+
+#user-page-control > *.disable,
+#user-page-control > *.disable:hover {
+  color: #d1d5da;
+  cursor: default;
+  background: #fafbfc;
+}
+
+#user-page-control > *.warp {
+  position: relative;
+}
+
+#user-page-control > *.warp .warp-content {
+  display: none;
+  opacity: 0;
+  position: absolute;
+  background: white;
+  top: 0;
+  left: 0;
+  transform: translateY(-100%);
+}
+
+#user-page-control > *.warp:hover .warp-content {
+  display: block;
+  opacity: 1;
+}
+
+/* Admin Page / Section: Organization */
+
+#org-collection {
+  display: grid;
+  grid-template-columns: 5fr repeat(3, 3fr) 1fr;
+}
+
+#org-collection * {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  background: #f4f4f4;
+}
+
+#org-collection .title {
+  font-size: 0.9rem;
+  background: var(--primary-color);
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  position: sticky;
+  top: 0;
+  left: 0;
+}
+
+#org-collection .orgData {
+  font-size: 0.7rem;
+  padding: 0 0.3rem;
+}
+
+#org-collection .paper-grid {
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border: none;
+  height: 100%;
+}
+#org-collection .paper-grid .paper-summary {
+  grid-column: span 3;
+}
+
+#org-collection .orgSummary {
+  padding: 0 0.3rem;
+}
+#org-collection .orgSummary,
+#org-collection .orgSummary * {
+  background: #fef4e2;
+  font-size: 0.9rem;
+}
+#org-collection .orgSummary.paper-grid {
+  padding: 0;
+}
+#org-collection .orgSummary > div {
+  font-size: 0.7rem;
 }
