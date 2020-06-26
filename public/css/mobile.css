@@ -1,5 +1,5 @@
 @media (max-width: 1200px) {
-  #org-collection .paper-grid {
+  .paper-grid {
     grid-template-columns: 1fr;
   }
 
@@ -11,7 +11,7 @@
 @media (max-width: 1024px) {
   html,
   body {
-    font-size: 20px;
+    font-size: 25px;
   }
 
   .sidebar {
@@ -110,7 +110,7 @@
   }
 
   /* Admin */
-  .admin-container h2 {
+  .container h2 {
     width: 100vw;
     height: 50px;
     display: flex;
@@ -123,7 +123,7 @@
     left: 0;
   }
 
-  .admin-container .table-content {
+  .container .table-content {
     margin-top: calc(50px + 1rem);
   }
 }
@@ -131,7 +131,7 @@
 @media (max-width: 560px) {
   html,
   body {
-    font-size: 16px;
+    font-size: 20px;
   }
 
   .modal .form-group {
@@ -170,5 +170,11 @@
     width: 100%;
     margin: 0;
     margin-top: 0.2rem;
+  }
+}
+
+@media (max-height: 500px) {
+  header.heading {
+    position: relative;
   }
 }

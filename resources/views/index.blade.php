@@ -4,16 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/css/all.min.css">
+    <link rel="stylesheet" href="/css/style.css">
     <link
       rel="stylesheet"
-      href="css/mobile.css"
+      href="/css/mobile.css"
     />
     <link href="https://fonts.googleapis.com/css?family=Athiti|Kanit|Mali&display=swap" rel="stylesheet">
     <title>Form</title>
   </head>
-  <body>
+  <body class="bg_sk" style="margin-top: -1rem;padding-top:1rem;">
     @include('component/sidebar',['current'=>'การสั่งพิมพ์'])
     <form action="/" method="post" onsubmit="return formCheck()">
       @csrf
@@ -80,7 +80,7 @@
               <th class="bg-brown">กระดาษน้ำตาล</th>
               <th class="content-center"><input id="brownPageOrigin" class="brown auto-fill" type="number" name="brownPageOrigin"></th>
               <th class="content-center"><input id="brownCopy" class="brown auto-fill" type="number" name="brownCopy"></th>
-              <th id="brown-toggler"><input id="brownPagePerPaper" type="hidden" name="brownPagePerPaper" value="2"><i class="fas fa-chevron-circle-left hide"></i><div id="brownType" class="toggle-btn">หน้า-หลัง</div><i class="fas fa-chevron-circle-right"></i></th>
+              <th id="brown-toggler"><input id="brownPagePerPaper" type="hidden" name="brownPagePerPaper" value="2"><i class="fas fa-chevron-circle-left hide"></i><div id="brownType" class="toggle-btn">หน้า-หลัง</div><i class="fas fa-chevron-circle-right"></i></th></th>
               <th><input type="number" id="brownPerCopy" disabled="disabled" value="0"></th>
               <th><input id="brown-total" type="number" name="brownTotal" disabled="disabled" value="0"></th>
             </tr>
@@ -103,7 +103,7 @@
           </tbody>
         </table>
         <input type="submit" value="PRINT" class="btn v-large-btn">
-        <script src="js/table_form.js"></script>
+        <script src="/js/table_form.js"></script>
 @if ($openPDF)
         <div class="pdf-layout">
           <div class="pdf-box" onclick="openPDF()">Click เพื่อ Print PDF</div>

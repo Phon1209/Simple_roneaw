@@ -3,6 +3,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html"; charset="utf-8">
     <title></title>
+
     <style>
       @font-face {
         font-family: "THSarabunNew";
@@ -40,6 +41,9 @@
       }
       table, th, td {
         border: 1px solid black;
+      }
+      th {
+        width: 100%;
       }
       block {
         display: block;
@@ -81,46 +85,39 @@
     </div>
     <div class="pdfbody">
       <block><span class="bold">วันที่</span> {{date("d/m/Y")}} เวลา {{date("H:i:s")}}</block>
-      <block><span class="bold">จัดทำ: </span> {{$translate['WorkType'][$orderData['WorkType']]}}</block>
+      <block><span class="bold">หน่วยงาน: </span> {{$organizationName}}</block>
       <block>
         <table>
           <thead>
             <tr>
               <th>ชนิดกระดาษ</th>
-              <th>จำนวนต้นฉบับ(หน้า)</th>
-              <th>จำนวนสำเนา(ชุด)</th>
-              <th>ลักษณะเอกสาร</th>
+              <th>เอกสารการสอน</th>
+              <th>เอกสารทั่วไป</th>
+              <th>ข้อสอบ</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <th>กระดาษน้ำตาล</th>
-              <th>{{$orderData['brownPageOrigin']}}</th>
-              <th>{{$orderData['brownCopy']}}</th>
-              <th>{{$translate['pagePerPaper'][$orderData['brownPagePerPaper']]}}</th>
+              <th>{{$organizationDataList->WorkType1BrownPaper}}</th>
+              <th>{{$organizationDataList->WorkType2BrownPaper}}</th>
+              <th>{{$organizationDataList->WorkType3BrownPaper}}</th>
             </tr>
             <tr>
               <th>กระดาษขาว</th>
-              <th>{{$orderData['whitePageOrigin']}}</th>
-              <th>{{$orderData['whiteCopy']}}</th>
-              <th>{{$translate['pagePerPaper'][$orderData['whitePagePerPaper']]}}</th>
+              <th>{{$organizationDataList->WorkType1WhitePaper}}</th>
+              <th>{{$organizationDataList->WorkType2WhitePaper}}</th>
+              <th>{{$organizationDataList->WorkType3WhitePaper}}</th>
             </tr>
             <tr>
               <th>กระดาษสี</th>
-              <th>{{$orderData['colorPageOrigin']}}</th>
-              <th>{{$orderData['colorCopy']}}</th>
-              <th>{{$translate['pagePerPaper'][$orderData['colorPagePerPaper']]}}</th>
+              <th>{{$organizationDataList->WorkType1ColorPaper}}</th>
+              <th>{{$organizationDataList->WorkType2ColorPaper}}</th>
+              <th>{{$organizationDataList->WorkType3ColorPaper}}</th>
             </tr>
           </tbody>
         </table>
       </block>
-      <div class="pdfsignature">
-        <div class="signature">
-          <p>ลงชื่อ.................................................................</p>
-          <p>({{$userData->DisplayName}})</p>
-          <p>{{$organizationName}}</p>
-        </div>
-      </div>
     </div>
   </body>
 </html>
