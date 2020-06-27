@@ -196,9 +196,10 @@
         </section>
       </div>
     </div>
+    <script src="/js/loader.js"></script>
     <script src="/admin/js/ui.js"></script>
-    <script src="/admin/js/api.js"></script>
-    <script src="/_admin/js/utilities.js"></script>
+    <script src="/js/api.js"></script>
+    <script src="/admin/js/utilities.js"></script>
   </body>
   <script type="text/javascript">
     const token = "{{csrf_token()}}";
@@ -237,10 +238,12 @@
 
     class userManager {
       static deleteUser(usr) {
+        loader.onLoad();
         API.sendRequest(
           "/admin/deleteUser",
           `_token=${token}&usr=` + usr,
           function (xhr) {
+            loader.loadFinished();
             if (xhr.responseText == "true") {
               UI.showAlert(`ลบผู้ใช้ ${usr} สำเร็จแล้ว`,"alert alert-success");
               userManager.updateUserCollection();
@@ -277,10 +280,12 @@
 
       static updateUserCollection()
       {
+        loader.onLoad();
         API.sendRequest(
           "/admin/getUserDataList",
           `_token=${token}`,
           function (xhr) {
+            loader.loadFinished();
             userDataList=JSON.parse(xhr.responseText);
           }
         );
@@ -325,7 +330,7 @@
       };
 
       static pageRequest(page) {
-        if(page <= this.userTableData.totalPage && page >= 1) 
+        if(page <= this.userTableData.totalPage && page >= 1)
         {
           this.userTableData.page = page;
           this.updateUserTable();
@@ -362,7 +367,7 @@
           </div>
           <div class="userData" username="${user['Username']}">
             <i class="fas fa-user-edit edit"></i>
-            <i class="fas fa-clipboard-list print"></i>
+            <i class="fas fa-clipboard-list history"></i>
             <i class="fas fa-trash-alt delete"></i>
           </div>
           <div class="userData">${user['Username']}</div>
@@ -430,10 +435,12 @@
           elem.remove();
         });
 
+        loader.onLoad();
         API.sendRequest(
           "/admin/getOrganizationDataList",
           `_token=${token}`,
           function (xhr) {
+            loader.loadFinished();
             const organizationDataList=JSON.parse(xhr.responseText);
             const paperSummary = {
               WorkType1BrownPaper:0,
@@ -519,7 +526,7 @@
         );
       }
     }
-    
+
 
     function confirmDeleteUser(usr)
     {
@@ -530,10 +537,12 @@
 
     function getOrgReport(id)
     {
+      loader.onLoad();
       API.sendRequest(
         "/admin/getOrganizationReport",
         `_token=${token}&id=${id}`,
         function (xhr) {
+          loader.loadFinished();
           if (xhr.responseText == "true")
           {
             window.open("/admin/organizationReport");
@@ -548,9 +557,11 @@
 
     modalAddUser.onclick=function()
     {
+      loader.onLoad();
       API.sendFormRequest("/admin/addUser",
       "addUserForm",
       function(xhr){
+        loader.loadFinished();
         if (xhr.responseText === "true")
         {
           UI.showAlert(`เพิ่มผู้ใช้ ${addUserForm_usr.value} สำเร็จแล้ว!`,'alert alert-success')
@@ -568,9 +579,11 @@
     btnEditUser.onclick=function()
     {
       editUserForm_usr.disabled=false;
+      loader.onLoad();
       API.sendFormRequest("/admin/editUser",
       "editUserForm",
       function(xhr){
+        loader.loadFinished();
         if (xhr.responseText=="true")
         {
           UI.showAlert(`แก้ไขผู้ใช้ ${editUserForm_usr.value} สำเร็จแล้ว`,"alert alert-success")

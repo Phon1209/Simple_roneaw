@@ -23,7 +23,7 @@
           <form id="filterForm">
             <div class="form-group">
               <label for="usrFilter">Username: </label>
-              <input type="text" id="usrFilter">
+              <input type="text" id="usrFilter"@if ($usrFilter!==NULL) value="{{$usrFilter}}"@endif>
             </div>
             <div class="form-group">
               <label for="displayNameFilter">Display Name:</label>
@@ -35,15 +35,15 @@
               </div>
               <div class="form-multi-body">
                 <div class="sub-form-group">
-                  <input type="checkbox" id="filter-worktype1" name="workTypeFilter" value="1">
+                  <input type="checkbox" id="filter-worktype1" name="workTypeFilter" value="1" checked>
                   <label for="filter-worktype1">เอกสารการสอน</label>
                 </div>
                 <div class="sub-form-group">
-                  <input type="checkbox" id="filter-worktype2" name="workTypeFilter" value="2">
+                  <input type="checkbox" id="filter-worktype2" name="workTypeFilter" value="2" checked>
                   <label for="filter-worktype2">เอกสารทั่วไป</label>
                 </div>
                 <div class="sub-form-group">
-                  <input type="checkbox" id="filter-worktype3" name="workTypeFilter" value="3">
+                  <input type="checkbox" id="filter-worktype3" name="workTypeFilter" value="3" checked>
                   <label for="filter-worktype3">ข้อสอบ</label>
                 </div>
               </div>
@@ -55,7 +55,7 @@
               <div class="form-multi-body form-grid-body">
                 @foreach($organizationList as $organizationID => $organizationName)
                 <div class="sub-form-group">
-                  <input type="checkbox" id="filter-org{{$organizationID}}" name="organizationFilter" value="{{$organizationID}}">
+                  <input type="checkbox" id="filter-org{{$organizationID}}" name="organizationFilter" value="{{$organizationID}}" checked>
                   <label for="filter-org{{$organizationID}}">{{$organizationName}}</label>
                 </div>
                 @endforeach
@@ -74,7 +74,7 @@
           <div></div>
           <div class="btn-control">
             <div class="dropdown" value="1">
-              เรียงโดย: 
+              เรียงโดย:
               <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownSortBy" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               เวลา
               </button>
@@ -88,7 +88,7 @@
               </div>
             </div>
             <div class="dropdown" value="1">
-              เรียงจาก: 
+              เรียงจาก:
               <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownSortOrder" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               น้อยไปมาก
               </button>
@@ -110,132 +110,20 @@
           <div class="title">WorkType</div>
           <div class="title">Paper</div>
           <div class="title">Time</div>
-
-          <div class="body d-flex-cc">000001</div>
-          <div class="body">Successor</div>
-          <div class="body">ปฏิพล เลิศสุธากุล</div>
-          <div class="body">กลุ่มสาระการเรียนรู้สังคมศึกษา ศาสนา และวัฒนธรรม</div>
-          <div class="body text-center">ข้อสอบ</div>
-          <div class="body paper-grid text-center">
-            <div class="bg-brown">3000</div>
-            <div class="bg-white">3000</div>
-            <div class="bg-pink">3000</div>
-          </div>
-          <div class="body text-center">
-            20:00:00 31/06/63
-          </div>
-          <div class="body d-flex-cc">000001</div>
-          <div class="body">Successor</div>
-          <div class="body">ปฏิพล เลิศสุธากุล</div>
-          <div class="body">กลุ่มสาระการเรียนรู้คณิตศาสตร์</div>
-          <div class="body text-center">เอกสารทั่วไป</div>
-          <div class="body paper-grid text-center">
-            <div class="bg-brown">3000</div>
-            <div class="bg-white">3000</div>
-            <div class="bg-pink">3000</div>
-          </div>
-          <div class="body text-center">
-            20:00:00 31/06/63
-          </div>
-          <div class="body d-flex-cc">000001</div>
-          <div class="body">Successor</div>
-          <div class="body">ปฏิพล เลิศสุธากุล</div>
-          <div class="body">กลุ่มสาระการเรียนรู้คณิตศาสตร์</div>
-          <div class="body text-center">เอกสารการสอน</div>
-          <div class="body paper-grid text-center">
-            <div class="bg-brown">3000</div>
-            <div class="bg-white">3000</div>
-            <div class="bg-pink">3000</div>
-          </div>
-          <div class="body text-center">
-            20:00:00 31/06/63
-          </div>
-          <div class="body d-flex-cc">000001</div>
-          <div class="body">Successor</div>
-          <div class="body">ปฏิพล เลิศสุธากุล</div>
-          <div class="body">กลุ่มสาระการเรียนรู้คณิตศาสตร์</div>
-          <div class="body text-center">เอกสารการสอน</div>
-          <div class="body paper-grid text-center">
-            <div class="bg-brown">3000</div>
-            <div class="bg-white">3000</div>
-            <div class="bg-pink">3000</div>
-          </div>
-          <div class="body text-center">
-            20:00:00 31/06/63
-          </div>
-          <div class="body d-flex-cc">000001</div>
-          <div class="body">Successor</div>
-          <div class="body">ปฏิพล เลิศสุธากุล</div>
-          <div class="body">กลุ่มสาระการเรียนรู้คณิตศาสตร์</div>
-          <div class="body text-center">เอกสารการสอน</div>
-          <div class="body paper-grid text-center">
-            <div class="bg-brown">3000</div>
-            <div class="bg-white">3000</div>
-            <div class="bg-pink">3000</div>
-          </div>
-          <div class="body text-center">
-            20:00:00 31/06/63
-          </div>
-          <div class="body d-flex-cc">000001</div>
-          <div class="body">Successor</div>
-          <div class="body">ปฏิพล เลิศสุธากุล</div>
-          <div class="body">กลุ่มสาระการเรียนรู้คณิตศาสตร์</div>
-          <div class="body text-center">เอกสารการสอน</div>
-          <div class="body paper-grid text-center">
-            <div class="bg-brown">3000</div>
-            <div class="bg-white">3000</div>
-            <div class="bg-pink">3000</div>
-          </div>
-          <div class="body text-center">
-            20:00:00 31/06/63
-          </div>
-          <div class="body d-flex-cc">000001</div>
-          <div class="body">Successor</div>
-          <div class="body">ปฏิพล เลิศสุธากุล</div>
-          <div class="body">กลุ่มสาระการเรียนรู้คณิตศาสตร์</div>
-          <div class="body text-center">เอกสารการสอน</div>
-          <div class="body paper-grid text-center">
-            <div class="bg-brown">3000</div>
-            <div class="bg-white">3000</div>
-            <div class="bg-pink">3000</div>
-          </div>
-          <div class="body text-center">
-            20:00:00 31/06/63
-          </div>
-          <div class="body d-flex-cc">000001</div>
-          <div class="body">Patiphon Loetsuthakun</div>
-          <div class="body">ปฏิพล เลิศสุธากุล</div>
-          <div class="body">กลุ่มสาระการเรียนรู้คณิตศาสตร์</div>
-          <div class="body text-center">เอกสารการสอน</div>
-          <div class="body paper-grid text-center">
-            <div class="bg-brown">3000</div>
-            <div class="bg-white">3000</div>
-            <div class="bg-pink">3000</div>
-          </div>
-          <div class="body text-center">
-            20:00:00 31/06/63
-          </div>
-          <div class="body d-flex-cc">000001</div>
-          <div class="body">Successor</div>
-          <div class="body">ปฏิพล เลิศสุธากุล</div>
-          <div class="body">กลุ่มสาระการเรียนรู้คณิตศาสตร์</div>
-          <div class="body text-center">เอกสารการสอน</div>
-          <div class="body paper-grid text-center">
-            <div class="bg-brown">3000</div>
-            <div class="bg-white">3000</div>
-            <div class="bg-pink">3000</div>
-          </div>
-          <div class="body text-center">
-            20:00:00 31/06/63
-          </div>
         </section>
         <section id="history-page-control" class="page-control py-2 child-round"></section>
       </div>
-    </div>
-    <script src="/admin/js/api.js"></script>
-    <script src="/js/dropdown.js"></script>
-    <script src="/_admin/js/utilities.js"></script>
+    </div>>
+    <script type="text/javascript">
+      const token = "{{csrf_token()}}";
+
+      window.history.replaceState({},document.title,window.location.pathname);
+    </script>
+    <script src="/js/loader.js"></script>
+    <script src="/js/api.js"></script>
+    <script src="/admin/js/dropdown.js"></script>
+    <script src="/admin/js/utilities.js"></script>
     <script src="/admin/js/ui.js"></script>
-    <script src="/_admin/js/history.js"></script>
+    <script src="/admin/js/history.js"></script>
   </body>
 </html>

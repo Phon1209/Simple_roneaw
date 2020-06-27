@@ -13,7 +13,7 @@
     />
     <title>Admin</title>
   </head>
-  <body>
+  <body class="bg_sk">
     <?php echo $__env->make('component/sidebar',['current'=>'โหมดผู้ดูแลระบบ'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <div class="modal-collection">
       <div class="modal" id="addUserPopup">
@@ -192,40 +192,41 @@
             <div class="title">Paper</div>
             <div class="title">Panel</div>
           </div>
-          <div id="user-page-control" class="py-2 child-round"></div>
+          <div id="user-page-control" class="page-control py-2 child-round"></div>
         </section>
       </div>
     </div>
     <script src="/admin/js/ui.js"></script>
-    <script src="/admin/js/api.js"></script>
+    <script src="/js/api.js"></script>
+    <script src="/admin/js/utilities.js"></script>
   </body>
   <script type="text/javascript">
+    const token = "<?php echo e(csrf_token()); ?>";
 
+    let userDataList;
+    const organizationList=<?php echo json_encode($organizationList); ?>;
+    const rankList=<?php echo json_encode($rankList); ?>;
 
-    var userDataList;
-    var organizationList=<?php echo json_encode($organizationList); ?>;
-    var rankList=<?php echo json_encode($rankList); ?>;
+    const addUserBtn=document.getElementById("addUserBtn");
+    const modalAddUser=document.getElementById("modal-addUser");
+    const btnEditUser=document.getElementById("btnEditUser");
+    const filterBtn=document.getElementById("filterBtn");
+    const btnFilterPopupClose=document.getElementById("btnFilterPopupClose");
 
-    var addUserBtn=document.getElementById("addUserBtn");
-    var modalAddUser=document.getElementById("modal-addUser");
-    var btnEditUser=document.getElementById("btnEditUser");
-    var filterBtn=document.getElementById("filterBtn");
-    var btnFilterPopupClose=document.getElementById("btnFilterPopupClose");
+    const addUserForm=document.getElementById("addUserForm");
+    const addUserForm_usr=document.getElementById("addUserForm_usr");
 
-    var addUserForm=document.getElementById("addUserForm");
-    var addUserForm_usr=document.getElementById("addUserForm_usr");
+    const editUserFormAllowChangePassword=document.getElementById("editUserFormAllowChangePassword");
+    const editUserForm_usr=document.getElementById("editUserForm_usr");
+    const editUserForm_pwd=document.getElementById("editUserForm_pwd");
+    const editUserForm_displayname=document.getElementById("editUserForm_displayname");
 
-    var editUserFormAllowChangePassword=document.getElementById("editUserFormAllowChangePassword");
-    var editUserForm_usr=document.getElementById("editUserForm_usr");
-    var editUserForm_pwd=document.getElementById("editUserForm_pwd");
-    var editUserForm_displayname=document.getElementById("editUserForm_displayname");
+    const confirmDeleteUserName=document.getElementById("confirmDeleteUserName");
+    const confirmDeleteUser_Confirm=document.getElementById("confirmDeleteUser_Confirm");
 
-    var confirmDeleteUserName=document.getElementById("confirmDeleteUserName");
-    var confirmDeleteUser_Confirm=document.getElementById("confirmDeleteUser_Confirm");
+    const filterForm=document.getElementById("filterForm");
 
-    var filterForm=document.getElementById("filterForm");
-
-    var userListDiv=document.getElementById("userListDiv");
+    const userListDiv=document.getElementById("userListDiv");
 
     const closeScreenNode = document.querySelectorAll(".modal-dismiss");
     closeScreenNode.forEach(node => {
@@ -238,7 +239,7 @@
       static deleteUser(usr) {
         API.sendRequest(
           "/admin/deleteUser",
-          "_token=<?php echo e(csrf_token()); ?>&usr=" + usr,
+          `_token=${token}&usr=` + usr,
           function (xhr) {
             if (xhr.responseText == "true") {
               UI.showAlert(`ลบผู้ใช้ ${usr} สำเร็จแล้ว`,"alert alert-success");
@@ -278,7 +279,7 @@
       {
         API.sendRequest(
           "/admin/getUserDataList",
-          "_token=<?php echo e(csrf_token()); ?>",
+          `_token=${token}`,
           function (xhr) {
             userDataList=JSON.parse(xhr.responseText);
           }
@@ -310,14 +311,30 @@
                 (Filter.organization.some(org => user.OrganizationIDList.includes(org)) || Filter.organization.length === 0);
         });
 
+        this.userTableData.page = 1;
+        this.userTableData.totalPage = Math.ceil(this.filteredUserList.length / this.userTableData.limit);
         this.updateUserTable();
         this.updateUserControl();
       }
 
       static userTableData = {
         page: 1,
-        limit: 10
+        limit: 10,
+        // limit: 1,
+        totalPage: 0,
       };
+
+      static pageRequest(page) {
+        if(page <= this.userTableData.totalPage && page >= 1)
+        {
+          this.userTableData.page = page;
+          this.updateUserTable();
+          this.updateUserControl();
+        }
+        else {
+          UI.showAlert(`ไม่พบหน้า ${page}`,"alert alert-warning");
+        }
+      }
 
       static updateUserTable() {
         const {page,limit} = this.userTableData;
@@ -345,7 +362,7 @@
           </div>
           <div class="userData" username="${user['Username']}">
             <i class="fas fa-user-edit edit"></i>
-            <i class="fas fa-clipboard-list print"></i>
+            <i class="fas fa-clipboard-list history"></i>
             <i class="fas fa-trash-alt delete"></i>
           </div>
           <div class="userData">${user['Username']}</div>
@@ -358,8 +375,7 @@
       }
 
       static updateUserControl() {
-        const {page,limit} = this.userTableData;
-        const totalPage = Math.ceil(this.filteredUserList.length / limit);
+        const {page,limit,totalPage} = this.userTableData;
         const pageNumberShowed = new Array();
         const userPageControl = document.querySelector("#user-page-control");
 
@@ -370,7 +386,7 @@
         for(let i = totalPage - 1;i <= totalPage; i++)
           if(i<=totalPage && i>=1)pageNumberShowed.push(i);
 
-        pageNumberShowed.sort();
+        pageNumberShowed.sort((x,y) => x-y);
 
         let lastPageNumber = 0;
 
@@ -382,6 +398,13 @@
         const paginationTemplate = (title,state,page) => {
           if(state === "disable")return `<span class="disable p-1">${title}</span>`
           else if(state === "current") return `<em class="current p-1">${title}</em>`
+          else if(state === "warp") return `
+            <span class="warp">
+              ${title}
+              <div class="warp-content p-1 round">
+                Page: <input type="number" class="round"/>
+              </div>
+            </span>`
           return `<a href="#user-collection" page="${page}" class="p-1">${title}</a>`
         }
 
@@ -391,7 +414,7 @@
             userPageControl.innerHTML += paginationTemplate(pageNumber,(pageNumber === page)? "current":"",pageNumber);
           }
           else if(pageNumber !== lastPageNumber) {
-            userPageControl.innerHTML += paginationTemplate("...","disable");
+            userPageControl.innerHTML += paginationTemplate("...","warp");
           }
           lastPageNumber = pageNumber;
         });
@@ -409,10 +432,10 @@
 
         API.sendRequest(
           "/admin/getOrganizationDataList",
-          "_token=<?php echo e(csrf_token()); ?>",
+          `_token=${token}`,
           function (xhr) {
-            let organizationDataList=JSON.parse(xhr.responseText);
-            let paperSummary={
+            const organizationDataList=JSON.parse(xhr.responseText);
+            const paperSummary = {
               WorkType1BrownPaper:0,
               WorkType1WhitePaper:0,
               WorkType1ColorPaper:0,
@@ -421,10 +444,18 @@
               WorkType2ColorPaper:0,
               WorkType3BrownPaper:0,
               WorkType3WhitePaper:0,
-              WorkType3ColorPaper:0
+              WorkType3ColorPaper:0,
+              allPaper: function() {
+                let output = 0;
+                for(let paper in this) {
+                  if(typeof this[paper] === "function") continue;
+                  output += this[paper];
+                }
+                return output;
+              }
             };
 
-            organizationDataList.forEach(orgData => {
+            organizationDataList.forEach((orgData,index) => {
               paperSummary['WorkType1BrownPaper']+=orgData['WorkType1BrownPaper'];
               paperSummary['WorkType1WhitePaper']+=orgData['WorkType1WhitePaper'];
               paperSummary['WorkType1ColorPaper']+=orgData['WorkType1ColorPaper'];
@@ -435,7 +466,7 @@
               paperSummary['WorkType3WhitePaper']+=orgData['WorkType3WhitePaper'];
               paperSummary['WorkType3ColorPaper']+=orgData['WorkType3ColorPaper'];
 
-              let output = `
+              const NodeList = createNodesByHTML(`
               <div class="orgData">${orgData['Name']}</div>
               <div class="orgData paper-grid">
                 <div class="bg-brown">${orgData['WorkType1BrownPaper']}</div>
@@ -457,69 +488,38 @@
               </div>
               <div class="orgData">${orgData['BrownPaperSummary']+orgData['WhitePaperSummary']+orgData['ColorPaperSummary']}</div>
               <div class="orgData"><i class="fas fa-clipboard-list" onclick=getOrgReport(${orgData['id']})></i></div>
-              `;
-
-              orgCollection.innerHTML += output;
+              `);
+              appendChildren(orgCollection,NodeList);
             });
-
-            orgCollection.innerHTML += `
-            <div class="orgSummary">รวมทั้งหมด</div>
-            <div class="orgSummary paper-grid">
-              <div class="bg-brown">${paperSummary['WorkType1BrownPaper']}</div>
-              <div class="bg-white">${paperSummary['WorkType1WhitePaper']}</div>
-              <div class="bg-pink">${paperSummary['WorkType1ColorPaper']}</div>
-              <div class="paper-summary">รวม: ${paperSummary['WorkType1BrownPaper']+paperSummary['WorkType1WhitePaper']+paperSummary['WorkType1ColorPaper']}</div>
-            </div>
-            <div class="orgSummary paper-grid">
-              <div class="bg-brown">${paperSummary['WorkType2BrownPaper']}</div>
-              <div class="bg-white">${paperSummary['WorkType2WhitePaper']}</div>
-              <div class="bg-pink">${paperSummary['WorkType2ColorPaper']}</div>
-              <div class="paper-summary">รวม: ${paperSummary['WorkType2BrownPaper']+paperSummary['WorkType2WhitePaper']+paperSummary['WorkType2ColorPaper']}</div>
-            </div>
-            <div class="orgSummary paper-grid">
-              <div class="bg-brown">${paperSummary['WorkType3BrownPaper']}</div>
-              <div class="bg-white">${paperSummary['WorkType3WhitePaper']}</div>
-              <div class="bg-pink">${paperSummary['WorkType3ColorPaper']}</div>
-              <div class="paper-summary">รวม: ${paperSummary['WorkType3BrownPaper']+paperSummary['WorkType3WhitePaper']+paperSummary['WorkType3ColorPaper']}</div>
-            </div>
-            <div class="orgSummary">${paperSummary['WorkType1BrownPaper']+paperSummary['WorkType1WhitePaper']+paperSummary['WorkType1ColorPaper']
-                                     +paperSummary['WorkType2BrownPaper']+paperSummary['WorkType2WhitePaper']+paperSummary['WorkType2ColorPaper']
-                                     +paperSummary['WorkType3BrownPaper']+paperSummary['WorkType3WhitePaper']+paperSummary['WorkType3ColorPaper']}</div>
-            `;
+            const NodeList = createNodesByHTML(`
+              <div class="orgSummary">รวมทั้งหมด</div>
+              <div class="orgSummary paper-grid">
+                <div class="bg-brown">${paperSummary.WorkType1BrownPaper}</div>
+                <div class="bg-white">${paperSummary['WorkType1WhitePaper']}</div>
+                <div class="bg-pink">${paperSummary['WorkType1ColorPaper']}</div>
+                <div class="paper-summary">รวม: ${paperSummary['WorkType1BrownPaper']+paperSummary['WorkType1WhitePaper']+paperSummary['WorkType1ColorPaper']}</div>
+              </div>
+              <div class="orgSummary paper-grid">
+                <div class="bg-brown">${paperSummary['WorkType2BrownPaper']}</div>
+                <div class="bg-white">${paperSummary['WorkType2WhitePaper']}</div>
+                <div class="bg-pink">${paperSummary['WorkType2ColorPaper']}</div>
+                <div class="paper-summary">รวม: ${paperSummary['WorkType2BrownPaper']+paperSummary['WorkType2WhitePaper']+paperSummary['WorkType2ColorPaper']}</div>
+              </div>
+              <div class="orgSummary paper-grid">
+                <div class="bg-brown">${paperSummary['WorkType3BrownPaper']}</div>
+                <div class="bg-white">${paperSummary['WorkType3WhitePaper']}</div>
+                <div class="bg-pink">${paperSummary['WorkType3ColorPaper']}</div>
+                <div class="paper-summary">รวม: ${paperSummary['WorkType3BrownPaper']+paperSummary['WorkType3WhitePaper']+paperSummary['WorkType3ColorPaper']}</div>
+              </div>
+              <div class="orgSummary">${paperSummary.allPaper()}</div>
+              <div class="orgSummary"></div>
+              `);
+              appendChildren(orgCollection,NodeList);
           }
         );
-
-
-        // usage: Create Node by template provide below
-        //         and use insertBefore to insert that node into collection
-        // TODO: Implement
-
-        //   `<div class="orgData">กลุ่มสาระการเรียนรู้สังคมศึกษา ศาสนา และวัฒนธรรม</div>
-        // <div class="orgData paper-grid">
-        //   <div class="bg-brown">1</div>
-        //   <div class="bg-white">0</div>
-        //   <div class="bg-pink">6</div>
-        //   <div class="paper-summary">รวม: 7</div>
-        // </div>
-        // <div class="orgData paper-grid">
-        //   <div class="bg-brown">2</div>
-        //   <div class="bg-white">10</div>
-        //   <div class="bg-pink">100</div>
-        //   <div class="paper-summary">รวม: 112</div>
-        // </div>
-        // <div class="orgData paper-grid">
-        //   <div class="bg-brown">7</div>
-        //   <div class="bg-white">7</div>
-        //   <div class="bg-pink">7</div>
-        //   <div class="paper-summary">รวม: 21</div>
-        // </div>
-        // <div class="orgData">140</div>`
       }
     }
-    function leadZero(num) {
-      const s = "00000" + (+num);
-      return s.substr(s.length-5);
-    }
+
 
     function confirmDeleteUser(usr)
     {
@@ -532,7 +532,7 @@
     {
       API.sendRequest(
         "/admin/getOrganizationReport",
-        `_token=<?php echo e(csrf_token()); ?>&id=${id}`,
+        `_token=${token}&id=${id}`,
         function (xhr) {
           if (xhr.responseText == "true")
           {

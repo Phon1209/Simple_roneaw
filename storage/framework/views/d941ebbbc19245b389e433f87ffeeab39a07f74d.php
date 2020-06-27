@@ -75,7 +75,7 @@
     </style>
   </head>
   <body>
-  <div class="pdfheader">
+    <div class="pdfheader">
       <block><img src="<?php echo e(storage_path('/images/sk_logo.png')); ?>" width="100px"></block>
       <block class="header">โรงเรียนสวนกุหลาบวิทยาลัย</block>
     </div>

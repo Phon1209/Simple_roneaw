@@ -128,6 +128,12 @@
   }
 }
 
+@media (max-width: 800px) {
+  #changePasswordForm {
+    width: 70%;
+  }
+}
+
 @media (max-width: 560px) {
   html,
   body {
@@ -170,6 +176,10 @@
     width: 100%;
     margin: 0;
     margin-top: 0.2rem;
+  }
+
+  #changePasswordForm {
+    width: 85%;
   }
 }
 

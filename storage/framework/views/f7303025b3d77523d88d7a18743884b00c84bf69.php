@@ -13,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css?family=Athiti|Kanit|Mali&display=swap" rel="stylesheet">
     <title>Form</title>
   </head>
-  <body>
+  <body class="bg_sk" style="margin-top: -1rem;padding-top:1rem;">
     <?php echo $__env->make('component/sidebar',['current'=>'การสั่งพิมพ์'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <form action="/" method="post" onsubmit="return formCheck()">
       <?php echo csrf_field(); ?>
@@ -80,7 +80,7 @@
               <th class="bg-brown">กระดาษน้ำตาล</th>
               <th class="content-center"><input id="brownPageOrigin" class="brown auto-fill" type="number" name="brownPageOrigin"></th>
               <th class="content-center"><input id="brownCopy" class="brown auto-fill" type="number" name="brownCopy"></th>
-              <th id="brown-toggler"><input id="brownPagePerPaper" type="hidden" name="brownPagePerPaper" value="2"><i class="fas fa-chevron-circle-left hide"></i><div id="brownType" class="toggle-btn">หน้า-หลัง</div><i class="fas fa-chevron-circle-right"></i></th>
+              <th id="brown-toggler"><input id="brownPagePerPaper" type="hidden" name="brownPagePerPaper" value="2"><i class="fas fa-chevron-circle-left hide"></i><div id="brownType" class="toggle-btn">หน้า-หลัง</div><i class="fas fa-chevron-circle-right"></i></th></th>
               <th><input type="number" id="brownPerCopy" disabled="disabled" value="0"></th>
               <th><input id="brown-total" type="number" name="brownTotal" disabled="disabled" value="0"></th>
             </tr>

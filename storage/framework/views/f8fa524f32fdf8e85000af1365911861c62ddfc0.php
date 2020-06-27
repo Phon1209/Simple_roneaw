@@ -14,25 +14,12 @@
     <title>Home</title>
   </head>
   <body>
-  <section class="sidebar">
-    <input type="checkbox" class="toggler"/>
-    <div class="hamburger">
-      <div></div>
-    </div>
-      <div class="menu">
-        <div>
-          <ul class="menu-list">
-            <li class="current"><a href="#">LOGIN</a></li>
-            <li><a href="#">HELP</a></li>
-          </ul>
-        </div>
-      </div>
-    </section>
     <section id="login-form">
       <div class="container">
         <form action="/login" method="post">
         <div class="form-group">
-          <h1>Roneaw</h1>
+          <img src="img/suankularb.png" alt="">
+          <h1>ระบบสั่ง</h1>
           <div class="line"></div>
 <?php if(isset($loginError)): ?>
             <div class="error-layout">

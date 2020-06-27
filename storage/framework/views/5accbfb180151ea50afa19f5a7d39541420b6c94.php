@@ -6,13 +6,14 @@
       <div class="menu">
         <div>
           <ul class="menu-list">
+            <li<?php echo $current=='ตั้งค่าบัญชี'?' class="current"><a href="#">':'><a href="/accountSetting">'; ?><?php echo e($userData->DisplayName); ?></a></li>
 <?php if($userRank==="Admin"): ?>
             <li<?php echo $current=='โหมดผู้ดูแลระบบ'?' class="current"><a href="#">':'><a href="/admin">'; ?>โหมดผู้ดูแลระบบ</a></li>
 <?php endif; ?>
-            <li<?php echo $current=='การสั่งพิมพ์'?' class="current"><a href="#">':'><a href="/">'; ?>การสั่งพิมพ์</a></li>
 <?php if($userRank==="Admin"): ?>
-            <li<?php echo $current=='ประวัติ'?' class="current"><a href="#">':'><a href="/admin/history">'; ?>ประวัติ</a></li>
+<li<?php echo $current=='ประวัติ'?' class="current"><a href="#">':'><a href="/admin/history">'; ?>ประวัติ</a></li>
 <?php endif; ?>
+            <li<?php echo $current=='การสั่งพิมพ์'?' class="current"><a href="#">':'><a href="/">'; ?>การสั่งพิมพ์</a></li>
             <li<?php echo $current=='ช่วยเหลือ'?' class="current"><a href="#">':'><a href="#">'; ?>ช่วยเหลือ</a></li>
             <li<?php echo $current=='ออกจากระบบ'?' class="current"><a href="#">':'><a href="/logout">'; ?>ออกจากระบบ</a></li>
           </ul>

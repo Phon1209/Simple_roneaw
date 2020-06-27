@@ -59,7 +59,7 @@ const UI = (function () {
       <div class="title">กระดาษที่ใช้</div>
       <div class="title">แผงควบคุม</div>
     </div>
-    <div id="user-page-control" class="py-2 child-round"></div>`;
+    <div id="user-page-control" class="page-control py-2 child-round"></div>`;
 
     Content.appendChild(userContent);
     userManager.updateUserCollection();
@@ -74,6 +74,11 @@ const UI = (function () {
         }
         if (e.target.classList.contains("delete")) {
           confirmDeleteUser(e.target.parentNode.getAttribute("username"));
+        }
+        if (e.target.classList.contains("history")) {
+          window.location.href = `/admin/history?usrFilter=${e.target.parentNode.getAttribute(
+            "username"
+          )}`;
         }
       });
 
