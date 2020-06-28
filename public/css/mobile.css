@@ -187,4 +187,8 @@
   header.heading {
     position: relative;
   }
+
+  .sidebar .menu ul.menu-list li {
+    font-size: 0.6rem;
+  }
 }

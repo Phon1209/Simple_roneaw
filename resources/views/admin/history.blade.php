@@ -19,7 +19,7 @@
       <div class="modal" id="historyFilter">
         <div class="modal-dismiss">&times;</div>
         <div>
-          <h3>Filter</h3>
+          <h3>ตัวกรอง</h3>
           <form id="filterForm">
             <div class="form-group">
               <label for="usrFilter">Username: </label>
@@ -35,15 +35,15 @@
               </div>
               <div class="form-multi-body">
                 <div class="sub-form-group">
-                  <input type="checkbox" id="filter-worktype1" name="workTypeFilter" value="1" checked>
+                  <input type="checkbox" id="filter-worktype1" name="workTypeFilter" value="1">
                   <label for="filter-worktype1">เอกสารการสอน</label>
                 </div>
                 <div class="sub-form-group">
-                  <input type="checkbox" id="filter-worktype2" name="workTypeFilter" value="2" checked>
+                  <input type="checkbox" id="filter-worktype2" name="workTypeFilter" value="2">
                   <label for="filter-worktype2">เอกสารทั่วไป</label>
                 </div>
                 <div class="sub-form-group">
-                  <input type="checkbox" id="filter-worktype3" name="workTypeFilter" value="3" checked>
+                  <input type="checkbox" id="filter-worktype3" name="workTypeFilter" value="3">
                   <label for="filter-worktype3">ข้อสอบ</label>
                 </div>
               </div>
@@ -55,7 +55,7 @@
               <div class="form-multi-body form-grid-body">
                 @foreach($organizationList as $organizationID => $organizationName)
                 <div class="sub-form-group">
-                  <input type="checkbox" id="filter-org{{$organizationID}}" name="organizationFilter" value="{{$organizationID}}" checked>
+                  <input type="checkbox" id="filter-org{{$organizationID}}" name="organizationFilter" value="{{$organizationID}}">
                   <label for="filter-org{{$organizationID}}">{{$organizationName}}</label>
                 </div>
                 @endforeach
@@ -63,6 +63,23 @@
             </div>
 
           </form>
+        </div>
+      </div>
+      <div class="modal" id="confirmClearHistory">
+        <div id="confirmClearBody" class="d-flex-cc text-center">
+          <div class="icon py-2">
+            <i class="fas fa-exclamation-triangle fa-2x"></i>
+          </div>
+          <div class="textContent">
+            <h5>ต้องการล้างประวัติการสั่งพิมพ์ จริงหรือไม่</h5>
+            <p>
+              คุณไม่สามารถย้อนกลับการกระทำนี้ได้
+            </p>
+          </div>
+          <div class="btn-control d-flex-cc">
+            <div class="btn bg-primary confirm-btn" id="confirmClearHistoryBtn">ใช่ ล้างเลย</div>
+            <div class="btn bg-danger cancel-btn" aria-labelled-by="confirmClearHistory">ยกเลิก</div>
+          </div>
         </div>
       </div>
     </div>
@@ -98,22 +115,25 @@
               </div>
             </div>
             <div id="historyFilterBtn" class="btn">
-              <i class="fas fa-filter"></i> Filter
+              <i class="fas fa-filter"></i> ตัวกรอง
+            </div>
+            <div id="deleteHistoryBtn" class="btn bg-danger">
+              <i class="fas fa-user-slash"></i> ล้างประวัติ
             </div>
           </div>
         </header>
         <section class="py-2" id="history-collection">
-          <div class="title">ID</div>
-          <div class="title">Username</div>
-          <div class="title">Display</div>
-          <div class="title">Organize</div>
-          <div class="title">WorkType</div>
-          <div class="title">Paper</div>
-          <div class="title">Time</div>
+          <div class="title">รายการ</div>
+          <div class="title">ชื่อผู้ใช้</div>
+          <div class="title">ชื่อ</div>
+          <div class="title">หน่วยงาน</div>
+          <div class="title">ประเภทงาน</div>
+          <div class="title">กระดาษ</div>
+          <div class="title">เวลาที่สั่ง</div>
         </section>
         <section id="history-page-control" class="page-control py-2 child-round"></section>
       </div>
-    </div>>
+    </div>
     <script type="text/javascript">
       const token = "{{csrf_token()}}";
 

@@ -454,6 +454,7 @@ i {
 .sidebar .menu ul.menu-list {
   padding: 10px;
   list-style: none;
+  overflow: scroll;
 }
 
 .sidebar .menu ul.menu-list li {
@@ -1265,6 +1266,32 @@ input[value="PRINT"]:hover {
   font-size: 0.7rem;
 }
 
+#confirmDeleteUserPopup,
+#confirmClearHistory {
+  background: rgb(255, 255, 255);
+}
+
+#confirmDeleteUserDiv,
+#confirmClearBody {
+  flex-direction: column;
+}
+.modal .icon > i {
+  color: var(--warning-color);
+}
+.modal .btn-control {
+  justify-content: space-around;
+}
+.modal .btn-control > * {
+  margin: 0 0.3rem;
+}
+
+.modal .textContent h5 {
+  font-size: 1rem;
+}
+
+.modal .textContent p {
+  font-size: 0.7rem;
+}
 /* Admin: History */
 #history-collection {
   display: grid;
@@ -1276,7 +1303,7 @@ input[value="PRINT"]:hover {
 }
 
 #history-collection .title {
-  font-size: 0.9rem;
+  font-size: 0.7rem;
   background: var(--secondary-color);
   text-align: center;
 }
@@ -1298,7 +1325,7 @@ input[value="PRINT"]:hover {
   justify-content: center;
 }
 
-#history-collection .no-data {
+.no-data {
   grid-column: span 7;
 }
 

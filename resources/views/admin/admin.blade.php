@@ -19,7 +19,7 @@
       <div class="modal" id="addUserPopup">
         <div class="modal-dismiss">&times;</div>
         <div>
-          <h3>Add User</h3>
+          <h3>เพิ่มผู้ใช้</h3>
           <form action="/admin/addUser" method="post" id="addUserForm">
               @csrf
 
@@ -69,7 +69,7 @@
       <div class="modal" id="editUserPopup">
         <div class="modal-dismiss">&times;</div>
         <div>
-          <h3>Edit User</h3>
+          <h3>แก้ไขผู้ใช้</h3>
           <form action="/admin/editUser" method="post" id="editUserForm">
               @csrf
 
@@ -119,16 +119,26 @@
         </div>
       </div>
       <div class="modal" id="confirmDeleteUserPopup">
-        <div class="modal-dismiss">&times;</div>
-        <div id="confirmDeleteUserDiv">
-          Confirm Delete User <span style="color:red;font-weight:bold" id="confirmDeleteUserName"></span>?
-          <input type="button" value="Yes" id="confirmDeleteUser_Confirm">
+        <div id="confirmDeleteUserDiv" class="d-flex-cc">
+          <div class="icon py-2">
+            <i class="fas fa-exclamation-triangle fa-2x"></i>
+          </div>
+          <div class="textContent">
+            <h5>ต้องการลบผู้ใช้ <span id='confirmDeleteUserName'></span> จริงหรือไม่</h5>
+            <p>
+              คุณไม่สามารถย้อนกลับการกระทำนี้ได้
+            </p>
+          </div>
+          <div class="btn-control d-flex-cc" >
+            <div class="btn bg-primary" id="confirmDeleteUser_Confirm">ใช่ ลบผู้ใช้นี้เลย</div>
+            <div class="btn bg-danger cancel-btn" aria-labelled-by="confirmDeleteUserPopup">ยกเลิก</div>
+          </div>
         </div>
       </div>
       <div class="modal" id="filterPopup">
         <div class="modal-dismiss" id="btnFilterPopupClose">&times;</div>
         <div>
-          <h3>Filter</h3>
+          <h3>ตัวกรอง</h3>
           <form id="filterForm">
             <div class="form-group">
               <label for="usrFilter">Username: </label>
@@ -177,12 +187,12 @@
       <div class="table-content">
         <header class="table-heading">
           <div class="tab-control">
-            <h4 class="checked tab" aria-label="User">User List</h4>
-            <h4 class="tab" aria-label="Organization">Organization List</h4>
+            <h4 class="checked tab" aria-label="User">รายชื่อผู้ใช้</h4>
+            <h4 class="tab" aria-label="Organization">รายชื่อหน่วยงาน</h4>
           </div>
           <div class="btn-control">
-            <div id="addUserBtn" class="btn"><i class="fas fa-user-plus"></i> Add User</div>
-            <div id="filterBtn" class="btn"><i class="fas fa-filter"></i> Filter</div>
+            <div id="addUserBtn" class="btn"><i class="fas fa-user-plus"></i> เพิ่มผู้ใช้</div>
+            <div id="filterBtn" class="btn"><i class="fas fa-filter"></i> ตัวกรอง</div>
           </div>
         </header>
         <section>
@@ -413,7 +423,7 @@
           return `<a href="#user-collection" page="${page}" class="p-1">${title}</a>`
         }
 
-        userPageControl.innerHTML += paginationTemplate("Previous",(page===1)? "disable":"",page-1);
+        userPageControl.innerHTML += paginationTemplate("Previous",(page<=1)? "disable":"",page-1);
         pageNumberShowed.forEach(pageNumber => {
           if(pageNumber - lastPageNumber === 1) {
             userPageControl.innerHTML += paginationTemplate(pageNumber,(pageNumber === page)? "current":"",pageNumber);
@@ -423,7 +433,7 @@
           }
           lastPageNumber = pageNumber;
         });
-        userPageControl.innerHTML += paginationTemplate("Next",(page === totalPage)? "disable":"",page+1);
+        userPageControl.innerHTML += paginationTemplate("Next",(page >= totalPage)? "disable":"",page+1);
       }
 
       static updateOrgList() {
@@ -608,6 +618,10 @@
     btnFilterPopupClose.onclick=function(){
       userManager.updateUserList();
     };
+
+    $("#confirmDeleteUserPopup .btn-control .cancel-btn").addEventListener("click",(e) => {
+      UI.closeModal(e.target.getAttribute("aria-labelled-by"));
+    })
 
   </script>
   <script src="/admin/js/app.js"></script>
