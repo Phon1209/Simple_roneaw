@@ -14,6 +14,7 @@
 <li{!!$current=='ประวัติ'?' class="current"><a href="#">':'><a href="/admin/history">'!!}ประวัติ</a></li>
 @endif
             <li{!!$current=='การสั่งพิมพ์'?' class="current"><a href="#">':'><a href="/">'!!}การสั่งพิมพ์</a></li>
+            <li{!!$current=='ติดต่อผู้จัดทำ'?' class="current"><a href="#">':'><a href="/contact">'!!}ติดต่อผู้จัดทำ</a></li>
             <li{!!$current=='ออกจากระบบ'?' class="current"><a href="#">':'><a href="/logout">'!!}ออกจากระบบ</a></li>
           </ul>
         </div>

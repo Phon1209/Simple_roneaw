@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en">
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -95,9 +95,7 @@
         const confirmnewpwd=document.querySelector("input[name='confirmnewpwd']").value;
         if (newpwd===confirmnewpwd)
         {
-          loader.onLoad();
           API.sendFormRequest("/changePassword","changePasswordForm",function(xhr){
-            loader.loadFinished();
             if (xhr.responseText==="true")
             {
               UI.showAlert("เปลื่ยนรหัสผ่านสำเร็จ","alert alert-success")

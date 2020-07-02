@@ -64,7 +64,6 @@ const UI = (function () {
     Content.appendChild(userContent);
     userManager.updateUserCollection();
 
-    // Handle Edit Delete Report Button
     document
       .querySelector("#user-collection")
       .addEventListener("click", (e) => {
@@ -82,7 +81,6 @@ const UI = (function () {
         }
       });
 
-    // Handle Page Control Button
     document
       .querySelector("#user-page-control")
       .addEventListener("click", function (e) {

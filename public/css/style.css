@@ -1,7 +1,5 @@
-/* @import url("https://fonts.googleapis.com/css2?family=Mali&display=swap"); */
 @import url("https://fonts.googleapis.com/css2?family=Mali:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&display=swap");
 
-/* Reset */
 * {
   margin: 0;
   padding: 0;
@@ -9,7 +7,6 @@
   box-sizing: border-box;
 }
 
-/* Main */
 :root {
   --primary-color: #ffc1ce;
   --secondary-color: #bbf6fe;
@@ -32,7 +29,6 @@ html,
 body {
   font-family: Arial, Helvetica, sans-serif;
   font-family: "Mali", cursive;
-  /* font-family:  Arial, Helvetica, sans-serif; */
   line-height: 1.7em;
   font-size: 30px;
   background: var(--white-color);
@@ -67,7 +63,6 @@ i {
   cursor: pointer;
   border: none !important;
 }
-/* Utilities */
 
 .container {
   margin: auto;
@@ -255,8 +250,6 @@ i {
   background: url("../img/background_sk.png") no-repeat center 0px / cover;
   background-attachment: fixed;
   min-height: 100vh;
-  /* filter: blur(5px);
-  -webkit-filter: blur(5px); */
 }
 
 .d-flex-cc {
@@ -290,10 +283,8 @@ i {
     transform: translateX(200%);
   }
 }
-/* Dropdown */
 
 .dropdown {
-  /* font-family: Arial, Helvetica, sans-serif; */
   position: relative;
   cursor: pointer;
   display: flex;
@@ -302,7 +293,6 @@ i {
   font-size: 0.8rem;
   margin: 0;
   margin-right: 0.8rem;
-  /* text-shadow: 0 0 0 0.3rem white; */
 }
 
 .dropdown-menu {
@@ -351,8 +341,6 @@ i {
   text-decoration: none;
   background-color: var(--light-primary-color);
 }
-
-/* Sidebar Utilities */
 
 .sidebar {
   z-index: 100;
@@ -416,7 +404,6 @@ i {
     background-color 0.2s cubic-bezier(0.55, 0.055, 0.675, 0.19);
 }
 
-/* Sidebar Toggle Animation */
 .sidebar .toggler:checked + .hamburger > div {
   background-color: transparent !important;
 }
@@ -438,7 +425,6 @@ i {
   transform: translate(0, 0);
 }
 
-/* Sidebar Styling */
 .sidebar .menu {
   background: rgba(48, 48, 48, 0.92);
   width: 400px;
@@ -481,10 +467,7 @@ i {
 }
 
 .sidebar .menu ul.menu-list li a:hover {
-  /* background: var(--light-primary-color); */
-  /* border: 2px var(--light-primary-color) solid; */
   box-shadow: inset 0px 0px 0px 2px var(--light-primary-color);
-  /* color: #333; */
 }
 
 .sidebar .menu ul.menu-list li a[href="/logout"] {
@@ -497,8 +480,6 @@ i {
   color: #fff;
   box-shadow: none;
 }
-
-/* Section: Login (Page: Login)*/
 
 #login-form {
   display: flex;
@@ -519,7 +500,6 @@ i {
 }
 
 #login-form .form-group img {
-  /* position: absolute; */
   width: 30%;
 }
 
@@ -541,7 +521,6 @@ i {
   text-align: left;
   font-size: 0.8rem;
   margin-bottom: 5px;
-  /* width: 4.5rem; */
 }
 
 #login-form .form-group .form-box input {
@@ -570,7 +549,6 @@ i {
   font-family: "Mali", cursive;
 }
 
-/* Section: Select Organization (Page: Form) */
 .slct {
   display: flex;
   flex-direction: column;
@@ -600,7 +578,7 @@ i {
   opacity: 0;
   position: fixed;
   width: 0;
-} /* Make Radio Disappear */
+}
 
 .slct .radio-slct label {
   display: inline-block;
@@ -640,8 +618,6 @@ header.heading {
 
 #org-slct {
   display: inline-block;
-  /* margin:  auto;
-  margin-top: 1rem; */
   border: #eee solid 2px;
   border-radius: 10px;
   background: #f4f4f4;
@@ -673,8 +649,6 @@ header.heading {
   min-width: 200px;
 }
 
-/* Section: Table Form */
-
 #table-form table {
   border-collapse: collapse;
   font-size: 0.6rem;
@@ -685,8 +659,6 @@ header.heading {
 }
 
 #table-form th {
-  /* border: 2px solid rgba(0, 0, 0, 0.3); */
-  /* border: 2px solid var(--darker-secondary-color); */
   border: 2px solid white;
   max-width: 8rem;
   height: 2rem;
@@ -768,15 +740,12 @@ header.heading {
   border: 2px red solid;
 }
 
-/* Remove arrow up/down in input tag */
-/* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
-/* Firefox */
 input[type="number"] {
   -moz-appearance: textfield;
 }
@@ -797,8 +766,6 @@ input[value="PRINT"]:hover {
   background: var(--darker-secondary-color);
 }
 
-/* Error Handler */
-
 .hidden-error {
   position: fixed;
   top: 0;
@@ -817,7 +784,6 @@ input[value="PRINT"]:hover {
   animation: fading 2s ease-out forwards 1s;
 }
 
-/* Modal */
 .modal-collection {
   display: none;
   position: fixed;
@@ -852,7 +818,6 @@ input[value="PRINT"]:hover {
   right: 1rem;
   line-height: 1rem;
   color: #aaa;
-  /* align-self: flex-end; */
   margin-right: 10px;
   font-size: 2rem;
 }
@@ -860,7 +825,6 @@ input[value="PRINT"]:hover {
 .modal .modal-dismiss:hover {
   color: black;
 }
-/* Modal Form */
 
 .modal form {
   display: flex;
@@ -897,7 +861,6 @@ input[value="PRINT"]:hover {
   background: rgba(200, 200, 200, 0.8);
 }
 
-/* Special Case on .form-group */
 .modal .form-ext input {
   width: 45%;
 }
@@ -1016,8 +979,6 @@ input[value="PRINT"]:hover {
   width: 100%;
   height: 100%;
 }
-
-/* Page: Admin Page */
 
 .table-content {
   margin-bottom: 1rem;
@@ -1208,8 +1169,6 @@ input[value="PRINT"]:hover {
   border: var(--border-color) 0.5px solid;
 }
 
-/* Admin Page / Section: Organization */
-
 #org-collection {
   display: grid;
   grid-template-columns: 5fr repeat(4, 3fr) 1fr;
@@ -1292,7 +1251,7 @@ input[value="PRINT"]:hover {
 .modal .textContent p {
   font-size: 0.7rem;
 }
-/* Admin: History */
+
 #history-collection {
   display: grid;
   grid-template-columns: 1fr 1fr repeat(2, 2fr) 1fr 2fr 1fr;
@@ -1329,7 +1288,6 @@ input[value="PRINT"]:hover {
   grid-column: span 7;
 }
 
-/* Account Setting Page */
 #changePasswordForm {
   width: 50vw;
   margin: 30px auto;

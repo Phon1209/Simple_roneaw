@@ -1,40 +1,47 @@
-class API {
-  static sendRequest(postURL, postData, callback) {
-    var xhr = new XMLHttpRequest();
+const API = {
+    sendRequest: function (postURL, postData, callback) {
+        var xhr = new XMLHttpRequest();
 
-    xhr.onload = function () {
-      if (this.status === 200) {
-        callback(this);
-      }
-    };
+        loader.onLoad();
+        xhr.onload = function () {
+            loader.loadFinished();
+            if (this.status === 200) {
+                callback(this);
+            }
+        };
 
-    xhr.open("POST", postURL, false);
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
-    xhr.send(postData);
-  }
+        xhr.open("POST", postURL);
+        xhr.setRequestHeader(
+            "Content-Type",
+            "application/x-www-form-urlencoded;charset=utf-8"
+        );
+        xhr.send(postData);
+    },
+    sendFormRequest: function (postURL, formID, callback) {
+        var xhr = new XMLHttpRequest();
 
-  static sendFormRequest(postURL, formID, callback) {
-    var xhr = new XMLHttpRequest();
+        loader.onLoad();
+        xhr.onload = function () {
+            loader.loadFinished();
+            if (this.status === 200) {
+                callback(this);
+            }
+        };
+        xhr.open("POST", postURL);
+        xhr.send(new FormData(document.getElementById(formID)));
+    },
+    sendJSONRequest: function (postURL, jsonObj, callback) {
+        var xhr = new XMLHttpRequest();
 
-    xhr.onload = function () {
-      if (this.status === 200) {
-        callback(this);
-      }
-    };
-    xhr.open("POST", postURL, false);
-    xhr.send(new FormData(document.getElementById(formID)));
-  }
-
-  static sendJSONRequest(postURL, jsonObj, callback) {
-    var xhr = new XMLHttpRequest();
-
-    xhr.onload = function () {
-      if (this.status === 200) {
-        callback(this);
-      }
-    };
-    xhr.open("POST", postURL, false);
-    xhr.setRequestHeader("Content-Type", "application/json;charset=utf-8");
-    xhr.send(JSON.stringify(jsonObj));
-  }
-}
+        loader.onLoad();
+        xhr.onload = function () {
+            loader.loadFinished();
+            if (this.status === 200) {
+                callback(this);
+            }
+        };
+        xhr.open("POST", postURL);
+        xhr.setRequestHeader("Content-Type", "application/json;charset=utf-8");
+        xhr.send(JSON.stringify(jsonObj));
+    },
+};

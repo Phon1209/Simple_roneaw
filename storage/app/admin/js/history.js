@@ -189,50 +189,47 @@ const historyCtl = (function () {
   });
 
   function requestPage(page) {
-    // Request to API for Data to Show then call addHistory
     clearHistory();
     if (page <= pageData.max && page >= 1) {
       pageData.current = page;
       const data = JSON.parse(JSON.stringify(_filter));
       data._token = token;
       data.Page = pageData.current;
-      loader.onLoad();
       API.sendJSONRequest("/admin/getHistory", data, function (xhr) {
-        loader.loadFinished();
         JSON.parse(xhr.responseText).forEach(function (historyData) {
           addHistory(historyData);
         });
+        updatePageControl(page, pageData.max);
       });
-      updatePageControl(page, pageData.max);
     } else {
       UI.showAlert(`ไม่พบหน้า ${page}`, "alert alert-warning");
     }
   }
 
   function getPageData() {
-    // Request Max Page From API
     pageData.current = 1;
     const data = JSON.parse(JSON.stringify(_filter));
     data._token = token;
-    loader.onLoad();
     API.sendJSONRequest("/admin/getHistoryMaxPage", data, function (xhr) {
-      loader.loadFinished();
       pageData.max = parseInt(JSON.parse(xhr.responseText));
+      updatePageControl(pageData.current, pageData.max);
+      if (pageData.max === 0) {
+        clearHistory();
+        const newNode = createNodesByHTML(`
+          <div class="no-data body d-flex-cc">No Data</div>
+          `);
+          appendChildren(historyCollection, newNode);
+      }
+      else {
+        requestPage(1);
+      }
     });
-    updatePageControl(pageData.current, pageData.max);
-    if (pageData.max === 0) {
-      clearHistory();
-      const newNode = createNodesByHTML(`
-      <div class="no-data body d-flex-cc">No Data</div>
-      `);
-      appendChildren(historyCollection, newNode);
-      return;
-    }
-    requestPage(1);
   }
 
   function deleteHistory() {
-    // Request Delete All History
+    API.sendRequest("/admin/clearHistory",`_token=${token}`,function(xhr){
+      getPageData();
+    });
   }
 
   updateFilter();
@@ -260,5 +257,6 @@ $("#confirmClearHistory .btn-control .confirm-btn").addEventListener(
   "click",
   (e) => {
     historyCtl.deleteHistory();
+    UI.closeModal(e.target.getAttribute("aria-labelled-by"));
   }
 );

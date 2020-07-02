@@ -24,7 +24,6 @@
       </div>
       @endisset
 
-      <!-- Form Error Popup -->
       <div id="org-error" class="hidden-error">
         <div class="error-box">ยังไม่ได้เลือกหน่วยงาน</div>
       </div>

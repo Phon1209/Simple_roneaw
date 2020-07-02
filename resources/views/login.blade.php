@@ -11,7 +11,7 @@
       href="/css/mobile.css"
     />
     <link href="https://fonts.googleapis.com/css?family=Athiti|Kanit|Mali|Roboto+Condensed|Source+Sans+Pro&display=swap" rel="stylesheet">
-    <title>Home</title>
+    <title>Login</title>
   </head>
   <body>
     <section id="login-form">
@@ -19,7 +19,7 @@
         <form action="/login" method="post">
         <div class="form-group">
           <img src="img/suankularb.png" alt="">
-          <h1>ระบบสั่ง</h1>
+          <h1>ระบบสั่งพิมพ์</h1>
           <div class="line"></div>
 @isset($loginError)
             <div class="error-layout">

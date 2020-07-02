@@ -77,7 +77,7 @@
             </p>
           </div>
           <div class="btn-control d-flex-cc">
-            <div class="btn bg-primary confirm-btn" id="confirmClearHistoryBtn">ใช่ ล้างเลย</div>
+            <div class="btn bg-primary confirm-btn" id="confirmClearHistoryBtn" aria-labelled-by="confirmClearHistory">ใช่ ล้างเลย</div>
             <div class="btn bg-danger cancel-btn" aria-labelled-by="confirmClearHistory">ยกเลิก</div>
           </div>
         </div>

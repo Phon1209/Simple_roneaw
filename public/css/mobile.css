@@ -103,13 +103,10 @@
     font-size: 0.45rem;
   }
 
-  /* Modal Form */
-
   .modal .form-grid .form-grid-body {
     grid-template-columns: 1fr;
   }
 
-  /* Admin */
   .container h2 {
     width: 100vw;
     height: 50px;

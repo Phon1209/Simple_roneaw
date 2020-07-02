@@ -1,5 +1,3 @@
-// Brown Roll
-
 const brown_fields = document.getElementsByClassName("brown");
 const brown_toggle = document.getElementById("brownType");
 const brown_pageperpaper = document.getElementById("brownPagePerPaper");
@@ -37,8 +35,6 @@ for (let iter = 0; iter < brown_fields.length; iter++) {
 }
 brown_toggle.addEventListener("click", updateBrownFunction);
 
-// White Roll
-
 const white_fields = document.getElementsByClassName("white");
 const white_toggle = document.getElementById("whiteType");
 const white_pageperpaper = document.getElementById("whitePagePerPaper");
@@ -68,8 +64,6 @@ for (let iter = 0; iter < white_fields.length; iter++) {
   white_fields[iter].addEventListener("keyup", updateWhiteFunction, false);
 }
 white_toggle.addEventListener("click", updateWhiteFunction);
-
-// Color Roll
 
 const color_fields = document.getElementsByClassName("color");
 const color_toggle = document.getElementById("colorType");

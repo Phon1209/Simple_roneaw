@@ -74,8 +74,9 @@
               @csrf
 
               <div class="form-group">
-                <label for="editUserForm_usr">Username: </label>
-                <input type="text" name="usr" id="editUserForm_usr" disabled>
+                <label for="editUserForm_usrShow">Username: </label>
+                <input type="text" id="editUserForm_usrShow" disabled>
+                <input type="hidden" name="usr" id="editUserForm_usr">
               </div>
               <div class="form-group form-ext">
                 <label for="editUserForm_pwd">Password: </label>
@@ -228,6 +229,7 @@
     const addUserForm_usr=document.getElementById("addUserForm_usr");
 
     const editUserFormAllowChangePassword=document.getElementById("editUserFormAllowChangePassword");
+    const editUserForm_usrShow=document.getElementById("editUserForm_usrShow");
     const editUserForm_usr=document.getElementById("editUserForm_usr");
     const editUserForm_pwd=document.getElementById("editUserForm_pwd");
     const editUserForm_displayname=document.getElementById("editUserForm_displayname");
@@ -246,17 +248,15 @@
       });
     });
 
-    class userManager {
-      static deleteUser(usr) {
-        loader.onLoad();
+    const userManager = (function() {
+      function deleteUser(usr) {
         API.sendRequest(
           "/admin/deleteUser",
           `_token=${token}&usr=` + usr,
           function (xhr) {
-            loader.loadFinished();
             if (xhr.responseText == "true") {
               UI.showAlert(`ลบผู้ใช้ ${usr} สำเร็จแล้ว`,"alert alert-success");
-              userManager.updateUserCollection();
+              updateUserCollection();
             } else if (xhr.responseText == "false") {
               UI.showAlert(`ลบผู้ใช้ ${usr} ไม่สำเร็จ`);
             }
@@ -265,12 +265,12 @@
         );
       }
 
-      static editUser(usr)
-      {
+      function editUser(usr) {
         const editUserData=userDataList.find(function(userData){
           return userData["Username"]===usr;
         });
 
+        editUserForm_usrShow.value=editUserData["Username"];
         editUserForm_usr.value=editUserData["Username"];
 
         document.querySelector(`.editUserForm_rank[value="${parseInt(editUserData["Rank"])}"]`).checked = true;
@@ -285,27 +285,23 @@
         });
 
         UI.showModal("editUserPopup");
-        userManager.updateUserCollection();
+        updateUserCollection();
       }
 
-      static updateUserCollection()
-      {
-        loader.onLoad();
+      function updateUserCollection() {
         API.sendRequest(
           "/admin/getUserDataList",
           `_token=${token}`,
           function (xhr) {
-            loader.loadFinished();
             userDataList=JSON.parse(xhr.responseText);
+            UI.resetForm("filterForm");
+            updateUserList();
           }
         );
-        UI.resetForm("filterForm");
-        userManager.updateUserList();
       }
 
-      static filteredUserList;
-      static updateUserList()
-      {
+      let filteredUserList;
+      function updateUserList() {
         const Filter = {
           user: document.getElementById("usrFilter").value,
           rank: [],
@@ -319,49 +315,47 @@
           if(elem.checked) Filter.organization.push(+elem.value);
         })
 
-        this.filteredUserList = userDataList.filter(function(user) {
+        filteredUserList = userDataList.filter(function(user) {
           return user.Username.includes(Filter.user) &&
                 (Filter.rank.includes(user.Rank) || Filter.rank.length === 0) &&
                 (user.DisplayName.includes(Filter.displayName)) &&
                 (Filter.organization.some(org => user.OrganizationIDList.includes(org)) || Filter.organization.length === 0);
         });
 
-        this.userTableData.page = 1;
-        this.userTableData.totalPage = Math.ceil(this.filteredUserList.length / this.userTableData.limit);
-        this.updateUserTable();
-        this.updateUserControl();
+        userTableData.page = 1;
+        userTableData.totalPage = Math.ceil(filteredUserList.length / userTableData.limit);
+        updateUserTable();
+        updateUserControl();
       }
-
-      static userTableData = {
+      const userTableData = {
         page: 1,
         limit: 10,
-        // limit: 1,
         totalPage: 0,
-      };
+      }
 
-      static pageRequest(page) {
-        if(page <= this.userTableData.totalPage && page >= 1)
+      function pageRequest(page) {
+        if(page <= userTableData.totalPage && page >= 1)
         {
-          this.userTableData.page = page;
-          this.updateUserTable();
-          this.updateUserControl();
+          userTableData.page = page;
+          updateUserTable();
+          updateUserControl();
         }
         else {
           UI.showAlert(`ไม่พบหน้า ${page}`,"alert alert-warning");
         }
       }
 
-      static updateUserTable() {
-        const {page,limit} = this.userTableData;
+      function updateUserTable() {
+        const {page,limit} = userTableData;
         const userCollection = document.getElementById("user-collection");
         document.querySelectorAll('#user-collection .userData').forEach(elem => {
           elem.remove();
         });
 
         for(let i = (page - 1)*limit; i<(page*limit) ;i++) {
-          if(i >= this.filteredUserList.length)break;
+          if(i >= filteredUserList.length)break;
 
-          const user = this.filteredUserList[i];
+          const user = filteredUserList[i];
           let OrgList = "";
           user['OrganizationIDList'].forEach(function(value,key){
             OrgList += `${key+1}) ${organizationList[value]}<br>`;
@@ -389,8 +383,8 @@
         }
       }
 
-      static updateUserControl() {
-        const {page,limit,totalPage} = this.userTableData;
+      function updateUserControl() {
+        const {page,limit,totalPage} = userTableData;
         const pageNumberShowed = new Array();
         const userPageControl = document.querySelector("#user-page-control");
 
@@ -436,7 +430,7 @@
         userPageControl.innerHTML += paginationTemplate("Next",(page >= totalPage)? "disable":"",page+1);
       }
 
-      static updateOrgList() {
+      function updateOrgList() {
         const orgCollection = document.getElementById("org-collection");
         document.querySelectorAll('#org-collection .orgData').forEach(elem => {
           elem.remove();
@@ -445,12 +439,10 @@
           elem.remove();
         });
 
-        loader.onLoad();
         API.sendRequest(
           "/admin/getOrganizationDataList",
           `_token=${token}`,
           function (xhr) {
-            loader.loadFinished();
             const organizationDataList=JSON.parse(xhr.responseText);
             const paperSummary = {
               WorkType1BrownPaper:0,
@@ -535,7 +527,18 @@
           }
         );
       }
-    }
+
+      return {
+        editUser,
+        deleteUser,
+        updateUserCollection,
+        updateUserList,
+        userTableData,
+        pageRequest, 
+        updateOrgList,
+      }
+
+    })();
 
 
     function confirmDeleteUser(usr)
@@ -547,12 +550,10 @@
 
     function getOrgReport(id)
     {
-      loader.onLoad();
       API.sendRequest(
         "/admin/getOrganizationReport",
         `_token=${token}&id=${id}`,
         function (xhr) {
-          loader.loadFinished();
           if (xhr.responseText == "true")
           {
             window.open("/admin/organizationReport");
@@ -567,11 +568,9 @@
 
     modalAddUser.onclick=function()
     {
-      loader.onLoad();
       API.sendFormRequest("/admin/addUser",
       "addUserForm",
       function(xhr){
-        loader.loadFinished();
         if (xhr.responseText === "true")
         {
           UI.showAlert(`เพิ่มผู้ใช้ ${addUserForm_usr.value} สำเร็จแล้ว!`,'alert alert-success')
@@ -588,12 +587,9 @@
 
     btnEditUser.onclick=function()
     {
-      editUserForm_usr.disabled=false;
-      loader.onLoad();
       API.sendFormRequest("/admin/editUser",
       "editUserForm",
       function(xhr){
-        loader.loadFinished();
         if (xhr.responseText=="true")
         {
           UI.showAlert(`แก้ไขผู้ใช้ ${editUserForm_usr.value} สำเร็จแล้ว`,"alert alert-success")
@@ -606,7 +602,6 @@
         UI.resetForm("editUserForm");
         UI.closeModal("editUserPopup");
       });
-      editUserForm_usr.disabled=true;
     };
 
     editUserFormAllowChangePassword.onchange=function()

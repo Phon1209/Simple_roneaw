@@ -1,4 +1,3 @@
-// Handle User/Org Tab
 document
   .querySelector(".admin-container .tab-control")
   .addEventListener("click", (e) => {
@@ -8,13 +7,10 @@ document
       });
       e.target.classList.add("checked");
 
-      // Change UI
       if (e.target.getAttribute("aria-label") === "User") UI.setupUserList();
       else UI.setupOrgsList();
     }
   });
-
-// Modal Button Event Listener
 
 addUserBtn.addEventListener("click", () => {
   UI.showModal("addUserPopup");
@@ -23,7 +19,5 @@ addUserBtn.addEventListener("click", () => {
 filterBtn.addEventListener("click", () => {
   UI.showModal("filterPopup");
 });
-
-// Actual APP
 
 UI.setupUserList();
